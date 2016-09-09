@@ -1,0 +1,291 @@
+      *===============================================================*
+      * PF ID         : TSPPARA
+      * Description   : Parameter File (Time Sheet Project)
+      * Author        : Vinayak Mahajan
+      * Date written  : August 26, 2016
+      * Reviewer      :
+      * Date Reviewed :
+      *===============================================================*
+     A                                      UNIQUE
+     A          R TSPPARA
+     A            PRKEY1        10A
+     A            PRKEY2        10A
+     A            PRKEY3        10A
+     A            PRKEY4        10A
+     A            PRKEY5        10A
+      *
+     A            PR5001        50A
+      *
+     A            PR3001        30A
+     A            PR3002        30A
+     A            PR3003        30A
+     A            PR3004        30A
+     A            PR3005        30A
+     A            PR3006        30A
+     A            PR3007        30A
+     A            PR3008        30A
+     A            PR3009        30A
+     A            PR3010        30A
+     A            PR3011        30A
+     A            PR3012        30A
+     A            PR3013        30A
+     A            PR3014        30A
+     A            PR3015        30A
+     A            PR3016        30A
+     A            PR3017        30A
+     A            PR3018        30A
+     A            PR3019        30A
+     A            PR3020        30A
+     A            PR3021        30A
+     A            PR3022        30A
+     A            PR3023        30A
+     A            PR3024        30A
+     A            PR3025        30A
+     A            PR3026        30A
+     A            PR3027        30A
+     A            PR3028        30A
+     A            PR3029        30A
+     A            PR3030        30A
+     A            PR3031        30A
+     A            PR3032        30A
+     A            PR3033        30A
+     A            PR3034        30A
+     A            PR3035        30A
+     A            PR3036        30A
+     A            PR3037        30A
+     A            PR3038        30A
+     A            PR3039        30A
+     A            PR3040        30A
+     A            PR3041        30A
+     A            PR3042        30A
+     A            PR3043        30A
+     A            PR3044        30A
+     A            PR3045        30A
+     A            PR3046        30A
+     A            PR3047        30A
+     A            PR3048        30A
+     A            PR3049        30A
+     A            PR3050        30A
+      *
+     A            PR1001        10A
+     A            PR1002        10A
+     A            PR1003        10A
+     A            PR1004        10A
+     A            PR1005        10A
+     A            PR1006        10A
+     A            PR1007        10A
+     A            PR1008        10A
+     A            PR1009        10A
+     A            PR1010        10A
+     A            PR1011        10A
+     A            PR1012        10A
+     A            PR1013        10A
+     A            PR1014        10A
+     A            PR1015        10A
+     A            PR1016        10A
+     A            PR1017        10A
+     A            PR1018        10A
+     A            PR1019        10A
+     A            PR1020        10A
+     A            PR1021        10A
+     A            PR1022        10A
+     A            PR1023        10A
+     A            PR1024        10A
+     A            PR1025        10A
+     A            PR1026        10A
+     A            PR1027        10A
+     A            PR1028        10A
+     A            PR1029        10A
+     A            PR1030        10A
+     A            PR1031        10A
+     A            PR1032        10A
+     A            PR1033        10A
+     A            PR1034        10A
+     A            PR1035        10A
+     A            PR1036        10A
+     A            PR1037        10A
+     A            PR1038        10A
+     A            PR1039        10A
+     A            PR1040        10A
+     A            PR1041        10A
+     A            PR1042        10A
+     A            PR1043        10A
+     A            PR1044        10A
+     A            PR1045        10A
+     A            PR1046        10A
+     A            PR1047        10A
+     A            PR1048        10A
+     A            PR1049        10A
+     A            PR1050        10A
+      *
+     A            PR0101         1A
+     A            PR0102         1A
+     A            PR0103         1A
+     A            PR0104         1A
+     A            PR0105         1A
+     A            PR0106         1A
+     A            PR0107         1A
+     A            PR0108         1A
+     A            PR0109         1A
+     A            PR0110         1A
+     A            PR0111         1A
+     A            PR0112         1A
+     A            PR0113         1A
+     A            PR0114         1A
+     A            PR0115         1A
+     A            PR0116         1A
+     A            PR0117         1A
+     A            PR0118         1A
+     A            PR0119         1A
+     A            PR0120         1A
+     A            PR0121         1A
+     A            PR0122         1A
+     A            PR0123         1A
+     A            PR0124         1A
+     A            PR0125         1A
+     A            PR0126         1A
+     A            PR0127         1A
+     A            PR0128         1A
+     A            PR0129         1A
+     A            PR0130         1A
+     A            PR0131         1A
+     A            PR0132         1A
+     A            PR0133         1A
+     A            PR0134         1A
+     A            PR0135         1A
+     A            PR0136         1A
+     A            PR0137         1A
+     A            PR0138         1A
+     A            PR0139         1A
+     A            PR0140         1A
+     A            PR0141         1A
+     A            PR0142         1A
+     A            PR0143         1A
+     A            PR0144         1A
+     A            PR0145         1A
+     A            PR0146         1A
+     A            PR0147         1A
+     A            PR0148         1A
+     A            PR0149         1A
+     A            PR0150         1A
+      *
+     A            PR1501        15S 0
+     A            PR1502        15S 0
+     A            PR1503        15S 0
+     A            PR1504        15S 0
+     A            PR1505        15S 0
+     A            PR1506        15S 0
+     A            PR1507        15S 0
+     A            PR1508        15S 0
+     A            PR1509        15S 0
+     A            PR1510        15S 0
+     A            PR1511        15S 0
+     A            PR1512        15S 0
+     A            PR1513        15S 0
+     A            PR1514        15S 0
+     A            PR1515        15S 0
+     A            PR1516        15S 0
+     A            PR1517        15S 0
+     A            PR1518        15S 0
+     A            PR1519        15S 0
+     A            PR1520        15S 0
+     A            PR1521        15S 0
+     A            PR1522        15S 0
+     A            PR1523        15S 0
+     A            PR1524        15S 0
+     A            PR1525        15S 0
+     A            PR1526        15S 0
+     A            PR1527        15S 0
+     A            PR1528        15S 0
+     A            PR1529        15S 0
+     A            PR1530        15S 0
+     A            PR1531        15S 0
+     A            PR1532        15S 0
+     A            PR1533        15S 0
+     A            PR1534        15S 0
+     A            PR1535        15S 0
+     A            PR1536        15S 0
+     A            PR1537        15S 0
+     A            PR1538        15S 0
+     A            PR1539        15S 0
+     A            PR1540        15S 0
+     A            PR1541        15S 0
+     A            PR1542        15S 0
+     A            PR1543        15S 0
+     A            PR1544        15S 0
+     A            PR1545        15S 0
+     A            PR1546        15S 0
+     A            PR1547        15S 0
+     A            PR1548        15S 0
+     A            PR1549        15S 0
+     A            PR1550        15S 0
+      *
+     A            PR0501         5S 0
+     A            PR0502         5S 0
+     A            PR0503         5S 0
+     A            PR0504         5S 0
+     A            PR0505         5S 0
+     A            PR0506         5S 0
+     A            PR0507         5S 0
+     A            PR0508         5S 0
+     A            PR0509         5S 0
+     A            PR0510         5S 0
+     A            PR0511         5S 0
+     A            PR0512         5S 0
+     A            PR0513         5S 0
+     A            PR0514         5S 0
+     A            PR0515         5S 0
+     A            PR0516         5S 0
+     A            PR0517         5S 0
+     A            PR0518         5S 0
+     A            PR0519         5S 0
+     A            PR0520         5S 0
+     A            PR0521         5S 0
+     A            PR0522         5S 0
+     A            PR0523         5S 0
+     A            PR0524         5S 0
+     A            PR0525         5S 0
+     A            PR0526         5S 0
+     A            PR0527         5S 0
+     A            PR0528         5S 0
+     A            PR0529         5S 0
+     A            PR0530         5S 0
+     A            PR0531         5S 0
+     A            PR0532         5S 0
+     A            PR0533         5S 0
+     A            PR0534         5S 0
+     A            PR0535         5S 0
+     A            PR0536         5S 0
+     A            PR0537         5S 0
+     A            PR0538         5S 0
+     A            PR0539         5S 0
+     A            PR0540         5S 0
+     A            PR0541         5S 0
+     A            PR0542         5S 0
+     A            PR0543         5S 0
+     A            PR0544         5S 0
+     A            PR0545         5S 0
+     A            PR0546         5S 0
+     A            PR0547         5S 0
+     A            PR0548         5S 0
+     A            PR0549         5S 0
+     A            PR0550         5S 0
+      *
+     A            PRCRDT         8A
+     A            PRCRTM         6A
+     A            PRCRUS        10A
+     A            PRCRWS        10A
+      *
+     A            PRUPDT         8A
+     A            PRUPTM         6A
+     A            PRUPUS        10A
+     A            PRUPWS        10A
+      *
+      * Key Fields
+      *
+     A          K PRKEY1
+     A          K PRKEY2
+     A          K PRKEY3
+     A          K PRKEY4
+     A          K PRKEY5
+      *===============================================================*
