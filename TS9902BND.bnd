@@ -1,0 +1,11 @@
+/* ================================================================================================================================ */
+/* Binder Source File for TS9902.                                                                                                   */
+/* ================================================================================================================================ */
+    STRPGMEXP SIGNATURE('TS9902 0001.000')                               
+        EXPORT SYMBOL('TIME_GETUSERPROFILE')                  
+        EXPORT SYMBOL('TIME_VALIDATEDATEFORMAT')                  
+        EXPORT SYMBOL('TIME_VALIDATEDATAFORMAT')                  
+        EXPORT SYMBOL('TIME_INSERTUSERPROFILE')                  
+        EXPORT SYMBOL('TIME_UPDATEUSERPROFILE')                  
+    ENDPGMEXP                                                         
+/* ================================================================================================================================ */
