@@ -7,5 +7,6 @@
         EXPORT SYMBOL('TIME_VALIDATEDATAFORMAT')                  
         EXPORT SYMBOL('TIME_INSERTUSERPROFILE')                  
         EXPORT SYMBOL('TIME_UPDATEUSERPROFILE')                  
+        EXPORT SYMBOL('TIME_GETERRORMESSAGE')                  
     ENDPGMEXP                                                         
 /* ================================================================================================================================ */

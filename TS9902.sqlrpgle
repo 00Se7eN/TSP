@@ -101,7 +101,7 @@
 
             OTHER;
                     IsValid     =   'N';
-                    ErrorID     =   2;          //Date Format is blank.
+                    ErrorID     =   2;          //Date Format is invalid.
         ENDSL;
 
         RETURN;
@@ -207,6 +207,37 @@
             CALLP   COMN_LogError(#User:ErrorDate:ErrorTime:SQLCODE:ProcName:Input:#JobName:#JobNo);
         ENDIF;
             
+        RETURN;
+
+    END-PROC;
+// ===================================================================================================================================
+// TIME_GetErrorMessage(): Get Error Message
+// -----------------------------------------------------------------------------------------------------------------------------------
+    DCL-PROC        TIME_GetErrorMessage EXPORT;
+
+        DCL-PI      TIME_GetErrorMessage;
+        DCL-PARM    ErrorID     ZONED(5:0)  CONST;
+        DCL-PARM    LangCode    CHAR(3)     CONST;
+        DCL-PARM    ErrorMsg    CHAR(78);
+        END-PI;
+
+        // Initialize Variables
+        ErrorMsg    =   *Blanks;
+
+        EXEC SQL
+        SELECT  ERRORMSG    INTO    :ErrorMsg
+                            FROM    ERRMSG
+                            WHERE   ERRORID     =   :ErrorID    AND
+                                    LANGCODE    =   :LangCode;
+
+        IF  SQLCODE     <>  *Zero;
+            ErrorDate   =   %dec(%date);
+            ErrorTime   =   %dec(%time);
+            ProcName    =   'TIME_GetErrorMessage';
+            Input       =   %char(ErrorID) + ' ' + LangCode;
+            CALLP   COMN_LogError(#User:ErrorDate:ErrorTime:SQLCODE:ProcName:Input:#JobName:#JobNo);
+        ENDIF;
+
         RETURN;
 
     END-PROC;
