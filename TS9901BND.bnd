@@ -1,0 +1,12 @@
+/* ================================================================================================================================ */
+/* Binder Source File for TS9901.                                                                                                   */
+/* ================================================================================================================================ */
+    STRPGMEXP SIGNATURE('TS9901 0001.000')                               
+        EXPORT SYMBOL('COMN_CREATEDETAILSTABLE')                  
+        EXPORT SYMBOL('COMN_CREATESUMMARYTABLE')                  
+        EXPORT SYMBOL('COMN_CREATEACTIVITIESTABLE')                  
+        EXPORT SYMBOL('COMN_CREATEERRORMESSAGETABLE')                  
+        EXPORT SYMBOL('COMN_CREATEERRORLOGTABLE')                  
+        EXPORT SYMBOL('COMN_LOGERROR')                  
+    ENDPGMEXP                                                         
+/* ================================================================================================================================ */
