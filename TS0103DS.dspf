@@ -1,0 +1,337 @@
+      *=======================================================================*
+                                            DSPSIZ(24 80 *DS3)
+                                            PRINT
+                                            ERRSFL
+                                            CF03(03)
+                                            CF12(12)
+      *=======================================================================*
+                R TS01031
+      *-----------------------------------------------------------------------*
+                                        1  2'TS01031'
+                                            COLOR(BLU)
+                                        1 36'Time Sheet'
+                                        1 73DATE
+                                            EDTCDE(Y)
+                                            COLOR(BLU)
+      *-----------------------------------------------------------------------*
+                                        2  2USER
+                                            COLOR(BLU)
+                                        2 35'Entry Screen'
+                                            COLOR(WHT)
+                                        2 73TIME
+                                            COLOR(BLU)
+      *-----------------------------------------------------------------------*
+                  DATEFORMAT     8A  O  5 10
+      *-----------------------------------------------------------------------*
+                                        6  2'Date...'
+                  ENTRYDATE      8Y 0B  6 10EDTCDE(4)
+                                            COLOR(PNK)
+       N34                                  DSPATR(UL)
+        34                                  DSPATR(PR)
+        51                                  DSPATR(PC)
+      *-----------------------------------------------------------------------*
+                                        8  2'ActID'
+                                            COLOR(BLU)
+                                        8 10'Start'
+                                            COLOR(BLU)
+        91                                  DSPATR(ND)
+                                        8 20'End'
+                                            COLOR(BLU)
+        92                                  DSPATR(ND)
+                                        8 26'Duration'
+                                            COLOR(BLU)
+        93                                  DSPATR(ND)
+                                        8 36'Activity'
+                                            COLOR(BLU)
+      *-----------------------------------------------------------------------*
+                                        9  9'HH : MM'
+        91                                  DSPATR(ND)
+                                        9 18'HH : MM'
+        92                                  DSPATR(ND)
+                                        9 27'HH : MM'
+        93                                  DSPATR(ND)
+      *-----------------------------------------------------------------------*
+                  ACTID1         5Y 0B 10  2EDTCDE(Z)
+                                            COLOR(WHT)
+       N34                                  DSPATR(UL)
+        34                                  DSPATR(PR)
+        52                                  DSPATR(PC)
+                  STARTHH1       2Y 0B 10  9COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 31                                  DSPATR(PR)
+        53                                  DSPATR(PC)
+        91                                  DSPATR(ND)
+                  STARTMM1       2Y 0B 10 14COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 31                                  DSPATR(PR)
+        54                                  DSPATR(PC)
+        91                                  DSPATR(ND)
+                                       10 12':'
+        91                                  DSPATR(ND)
+                  ENDHH1         2Y 0B 10 18COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 32                                  DSPATR(PR)
+        92                                  DSPATR(ND)
+        55                                  DSPATR(PC)
+                  ENDMM1         2Y 0B 10 23COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 32                                  DSPATR(PR)
+        92                                  DSPATR(ND)
+        56                                  DSPATR(PC)
+                                       10 21':'
+        92                                  DSPATR(ND)
+                  DRTNHH1        2Y 0B 10 27COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 33                                  DSPATR(PR)
+        93                                  DSPATR(ND)
+        57                                  DSPATR(PC)
+                  DRTNMM1        2Y 0B 10 32COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 33                                  DSPATR(PR)
+        93                                  DSPATR(ND)
+        58                                  DSPATR(PC)
+                                       10 30':'
+        93                                  DSPATR(ND)
+                  ACTIVITY1     45A  O 10 36COLOR(WHT)
+      *-----------------------------------------------------------------------*
+                  ACTID2         5Y 0B 11  2EDTCDE(Z)
+                                            COLOR(WHT)
+       N34                                  DSPATR(UL)
+        34                                  DSPATR(PR)
+        59                                  DSPATR(PC)
+                  STARTHH2       2Y 0B 11  9COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 31                                  DSPATR(PR)
+        91                                  DSPATR(ND)
+        60                                  DSPATR(PC)
+                  STARTMM2       2Y 0B 11 14COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 31                                  DSPATR(PR)
+        91                                  DSPATR(ND)
+        61                                  DSPATR(PC)
+                                       11 12':'
+        91                                  DSPATR(ND)
+                  ENDHH2         2Y 0B 11 18COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 32                                  DSPATR(PR)
+        92                                  DSPATR(ND)
+        62                                  DSPATR(PC)
+                  ENDMM2         2Y 0B 11 23COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 32                                  DSPATR(PR)
+        92                                  DSPATR(ND)
+        63                                  DSPATR(PC)
+                                       11 21':'
+        92                                  DSPATR(ND)
+                  DRTNHH2        2Y 0B 11 27COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 33                                  DSPATR(PR)
+        64                                  DSPATR(PC)
+        93                                  DSPATR(ND)
+                  DRTNMM2        2Y 0B 11 32COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 33                                  DSPATR(PR)
+        65                                  DSPATR(PC)
+        93                                  DSPATR(ND)
+                                       11 30':'
+        93                                  DSPATR(ND)
+                  ACTIVITY2     45A  O 11 36COLOR(WHT)
+      *-----------------------------------------------------------------------*
+                  ACTID3         5Y 0B 12  2EDTCDE(Z)
+                                            COLOR(WHT)
+       N34                                  DSPATR(UL)
+        34                                  DSPATR(PR)
+        66                                  DSPATR(PC)
+                  STARTHH3       2Y 0B 12  9COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 31                                  DSPATR(PR)
+        67                                  DSPATR(PC)
+        91                                  DSPATR(ND)
+                  STARTMM3       2Y 0B 12 14COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 31                                  DSPATR(PR)
+        68                                  DSPATR(PC)
+        91                                  DSPATR(ND)
+                                       12 12':'
+        91                                  DSPATR(ND)
+                  ENDHH3         2Y 0B 12 18COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 32                                  DSPATR(PR)
+        69                                  DSPATR(PC)
+        92                                  DSPATR(ND)
+                  ENDMM3         2Y 0B 12 23COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 32                                  DSPATR(PR)
+        70                                  DSPATR(PC)
+        92                                  DSPATR(ND)
+                                       12 21':'
+        92                                  DSPATR(ND)
+                  DRTNHH3        2Y 0B 12 27COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 33                                  DSPATR(PR)
+        71                                  DSPATR(PC)
+        93                                  DSPATR(ND)
+                  DRTNMM3        2Y 0B 12 32COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 33                                  DSPATR(PR)
+        72                                  DSPATR(PC)
+        93                                  DSPATR(ND)
+                                       12 30':'
+        93                                  DSPATR(ND)
+                  ACTIVITY3     45A  O 12 36COLOR(WHT)
+      *-----------------------------------------------------------------------*
+                  ACTID4         5Y 0B 13  2EDTCDE(Z)
+                                            COLOR(WHT)
+       N34                                  DSPATR(UL)
+        34                                  DSPATR(PR)
+        73                                  DSPATR(PC)
+                  STARTHH4       2Y 0B 13  9COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 31                                  DSPATR(PR)
+        74                                  DSPATR(PC)
+        91                                  DSPATR(ND)
+                  STARTMM4       2Y 0B 13 14COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 31                                  DSPATR(PR)
+        75                                  DSPATR(PC)
+        91                                  DSPATR(ND)
+                                       13 12':'
+        91                                  DSPATR(ND)
+                  ENDHH4         2Y 0B 13 18COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 32                                  DSPATR(PR)
+        76                                  DSPATR(PC)
+        92                                  DSPATR(ND)
+                  ENDMM4         2Y 0B 13 23COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 32                                  DSPATR(PR)
+        77                                  DSPATR(PC)
+        92                                  DSPATR(ND)
+                                       13 21':'
+        92                                  DSPATR(ND)
+                  DRTNHH4        2Y 0B 13 27COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 33                                  DSPATR(PR)
+        78                                  DSPATR(PC)
+        93                                  DSPATR(ND)
+                  DRTNMM4        2Y 0B 13 32COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 33                                  DSPATR(PR)
+        79                                  DSPATR(PC)
+        93                                  DSPATR(ND)
+                                       13 30':'
+        93                                  DSPATR(ND)
+                  ACTIVITY4     45A  O 13 36COLOR(WHT)
+      *-----------------------------------------------------------------------*
+                  ACTID5         5Y 0B 14  2EDTCDE(Z)
+                                            COLOR(WHT)
+       N34                                  DSPATR(UL)
+        34                                  DSPATR(PR)
+        80                                  DSPATR(PC)
+                  STARTHH5       2Y 0B 14  9COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 31                                  DSPATR(PR)
+        81                                  DSPATR(PC)
+        91                                  DSPATR(ND)
+                  STARTMM5       2Y 0B 14 14COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 31                                  DSPATR(PR)
+        82                                  DSPATR(PC)
+        91                                  DSPATR(ND)
+                                       14 12':'
+        91                                  DSPATR(ND)
+                  ENDHH5         2Y 0B 14 18COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 32                                  DSPATR(PR)
+        83                                  DSPATR(PC)
+        92                                  DSPATR(ND)
+                  ENDMM5         2Y 0B 14 23COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 32                                  DSPATR(PR)
+        84                                  DSPATR(PC)
+        92                                  DSPATR(ND)
+                                       14 21':'
+        92                                  DSPATR(ND)
+                  DRTNHH5        2Y 0B 14 27COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 33                                  DSPATR(PR)
+        85                                  DSPATR(PC)
+        93                                  DSPATR(ND)
+                  DRTNMM5        2Y 0B 14 32COLOR(WHT)
+                                            EDTCDE(Z)
+       N34                                  DSPATR(UL)
+        34
+      O 33                                  DSPATR(PR)
+        86                                  DSPATR(PC)
+        93                                  DSPATR(ND)
+                                       14 30':'
+        93                                  DSPATR(ND)
+                  ACTIVITY5     45A  O 14 36COLOR(WHT)
+      *-----------------------------------------------------------------------*
+                                       22  2'F3=Exit'
+                                            COLOR(BLU)
+                                       22 22'F12=Cancel'
+                                            COLOR(BLU)
+       N34                                  DSPATR(ND)
+      *-----------------------------------------------------------------------*
+                  MESSAGE       78A  O 24  2
+        50                                  DSPATR(RI)
+      *=======================================================================*

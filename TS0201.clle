@@ -1,0 +1,41 @@
+/* ================================================================================================================================ */
+/* Program ID       :   TS0201                                                                                                      */
+/* Description      :   Display Details                                                                                             */
+/* Author           :   Vinayak Mahajan                                                                                             */
+/* Date written     :   September 26, 2016                                                                                          */
+/* Based On Pgm     :   None                                                                                                        */
+/* Reviewer         :                                                                                                               */
+/* Date Reviewed    :                                                                                                               */
+/* ================================================================================================================================ */
+             PGM
+
+/* Variables                                                                                                                        */
+
+             DCL        VAR(&FROMDS) TYPE(*CHAR) LEN(25) VALUE('0000000000000000000000000')
+             DCL        VAR(&FENTRYDATE) TYPE(*DEC) STG(*DEFINED) LEN(8) DEFVAR(&FROMDS 1)
+             DCL        VAR(&FACTID)     TYPE(*DEC) STG(*DEFINED) LEN(5) DEFVAR(&FROMDS 9)
+             DCL        VAR(&FSTARTHH)   TYPE(*DEC) STG(*DEFINED) LEN(2) DEFVAR(&FROMDS 14)
+             DCL        VAR(&FSTARTMM)   TYPE(*DEC) STG(*DEFINED) LEN(2) DEFVAR(&FROMDS 16)
+             DCL        VAR(&FENDHH)     TYPE(*DEC) STG(*DEFINED) LEN(2) DEFVAR(&FROMDS 18)
+             DCL        VAR(&FENDMM)     TYPE(*DEC) STG(*DEFINED) LEN(2) DEFVAR(&FROMDS 20)
+             DCL        VAR(&FDRTNHH)    TYPE(*DEC) STG(*DEFINED) LEN(2) DEFVAR(&FROMDS 22)
+             DCL        VAR(&FDRTNMM)    TYPE(*DEC) STG(*DEFINED) LEN(2) DEFVAR(&FROMDS 24)
+
+             DCL        VAR(&TODS) TYPE(*CHAR) LEN(25) VALUE('9999999999999999999999999')
+             DCL        VAR(&TENTRYDATE) TYPE(*DEC) STG(*DEFINED) LEN(8) DEFVAR(&FROMDS 1)
+             DCL        VAR(&TACTID)     TYPE(*DEC) STG(*DEFINED) LEN(5) DEFVAR(&FROMDS 9)
+             DCL        VAR(&TSTARTHH)   TYPE(*DEC) STG(*DEFINED) LEN(2) DEFVAR(&FROMDS 14)
+             DCL        VAR(&TSTARTMM)   TYPE(*DEC) STG(*DEFINED) LEN(2) DEFVAR(&FROMDS 16)
+             DCL        VAR(&TENDHH)     TYPE(*DEC) STG(*DEFINED) LEN(2) DEFVAR(&FROMDS 18)
+             DCL        VAR(&TENDMM)     TYPE(*DEC) STG(*DEFINED) LEN(2) DEFVAR(&FROMDS 20)
+             DCL        VAR(&TDRTNHH)    TYPE(*DEC) STG(*DEFINED) LEN(2) DEFVAR(&FROMDS 22)
+             DCL        VAR(&TDRTNMM)    TYPE(*DEC) STG(*DEFINED) LEN(2) DEFVAR(&FROMDS 24)
+
+             DCL        VAR(&HIDESUBSET) TYPE(*CHAR) LEN(1) VALUE('N')
+
+/* Processing                                                                                                                       */
+
+             CALL       PGM(TS0202) PARM(&FROMDS &TODS &HIDESUBSET)
+
+             ENDPGM
+/* ================================================================================================================================ */
