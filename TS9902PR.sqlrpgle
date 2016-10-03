@@ -1,12 +1,12 @@
 **FREE
 // ===================================================================================================================================
-// Program ID    : TS9902PR
-// Description   : Main Procedures - Prototypes
-// Author        : Vinayak Mahajan
-// Date written  : August 31, 2016
-// Based On Pgm  : None
-// Reviewer      :
-// Date Reviewed :
+// Program ID       :   TS9902PR
+// Description      :   Main Procedures - Prototypes
+// Author           :   Vinayak Mahajan
+// Date written     :   August 31, 2016
+// Based On Pgm     :   None
+// Reviewer         :
+// Date Reviewed    :
 // ===================================================================================================================================
 // Prototypes
 // -----------------------------------------------------------------------------------------------------------------------------------
@@ -53,5 +53,168 @@
         DCL-PARM    ErrorID     ZONED(5:0)  CONST;
         DCL-PARM    LangCode    CHAR(3)     CONST;
         DCL-PARM    ErrorMsg    CHAR(78);
+        END-PR;
+// ===================================================================================================================================
+// TIME_GetAllActivities(): Get All Activities
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_GetAllActivities;
+        DCL-PARM    UserID              CHAR(10)    CONST;
+        DCL-PARM    Count               ZONED(5:0);
+        DCL-PARM    pActivitiesArray    POINTER     CONST;
+        END-PR;
+// ===================================================================================================================================
+// TIME_GetNextActivityID(): Get Next Activity ID
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_GetNextActivityID;
+        DCL-PARM    UserID      CHAR(10)    CONST;
+        DCL-PARM    ActivityID  ZONED(5:0);
+        END-PR;
+// ===================================================================================================================================
+// TIME_AddActivity(): Add Activity
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_AddActivity;
+        DCL-PARM    pActivityDS POINTER CONST;
+        END-PR;
+// ===================================================================================================================================
+// TIME_ChangeActivity(): Change Activity
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_ChangeActivity;
+        DCL-PARM    pActivityDS POINTER CONST;
+        END-PR;
+// ===================================================================================================================================
+// TIME_DeleteActivity(): Delete Activity
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_DeleteActivity;
+        DCL-PARM    pActivityDS POINTER CONST;
+        END-PR;
+// ===================================================================================================================================
+// TIME_ValidateActivity(): Validate Activity
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_ValidateActivity;
+        DCL-PARM    Activity    CHAR(50)    CONST;
+        DCL-PARM    IsValid     CHAR(1);
+        DCL-PARM    ErrorID     ZONED(5:0);
+        END-PR;
+// ===================================================================================================================================
+// TIME_ValidateStartTime(): Validate Start Time
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_ValidateStartTime;
+        DCL-PARM    StartHH     ZONED(2:0)  CONST;
+        DCL-PARM    StartMM     ZONED(2:0)  CONST;
+        DCL-PARM    IsValid     CHAR(1);
+        DCL-PARM    ErrorID     ZONED(5:0);
+        END-PR;
+// ===================================================================================================================================
+// TIME_ValidateEndTime(): Validate End Time
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_ValidateEndTime;
+        DCL-PARM    EndHH   ZONED(2:0)  CONST;
+        DCL-PARM    EndMM   ZONED(2:0)  CONST;
+        DCL-PARM    IsValid CHAR(1);
+        DCL-PARM    ErrorID ZONED(5:0);
+        END-PR;
+// ===================================================================================================================================
+// TIME_ValidateDuration(): Validate Duration
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_ValidateDuration;
+        DCL-PARM    DurationHH  ZONED(2:0)  CONST;
+        DCL-PARM    DurationMM  ZONED(2:0)  CONST;
+        DCL-PARM    IsValid     CHAR(1);
+        DCL-PARM    ErrorID     ZONED(5:0);
+        END-PR;
+// ===================================================================================================================================
+// TIME_ValidateHours(): Validate Hours
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_ValidateHours;
+        DCL-PARM    Hours   ZONED(2:0)  CONST;
+        DCL-PARM    IsValid CHAR(1);
+        END-PR;
+// ===================================================================================================================================
+// TIME_ValidateMinutes(): Validate Minutes
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_ValidateMinutes;
+        DCL-PARM    Minutes ZONED(2:0)  CONST;
+        DCL-PARM    IsValid CHAR(1);
+        END-PR;
+// ===================================================================================================================================
+// TIME_ComputeStartTime(): Compute Start Time
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_ComputeStartTime;
+        DCL-PARM    pTSEntryArray   POINTER CONST;
+        END-PR;
+// ===================================================================================================================================
+// TIME_ComputeEndTime(): Compute End Time
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_ComputeEndTime;
+        DCL-PARM    pTSEntryArray   POINTER CONST;
+        END-PR;
+// ===================================================================================================================================
+// TIME_ComputeDuration(): Compute Duration
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_ComputeDuration;
+        DCL-PARM    pTSEntryArray   POINTER CONST;
+        END-PR;
+// ===================================================================================================================================
+// TIME_GetActivityDescription(): Get Activity Description
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_GetActivityDescription;
+        DCL-PARM    ActID           ZONED(5:0)  CONST;
+        DCL-PARM    UserID          CHAR(10)    CONST;
+        DCL-PARM    pUserActsDS     POINTER     CONST;
+        DCL-PARM    ActivityExists  CHAR(1);
+        END-PR;
+// ===================================================================================================================================
+// TIME_AddDetailEntries(): Add Detail Entries
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_AddDetailEntries;
+        DCL-PARM    UserID          CHAR(10)    CONST;
+        DCL-PARM    EntryDate       ZONED(8:0)  CONST;
+        DCL-PARM    pTSEntryArray   POINTER     CONST;
+        END-PR;
+// ===================================================================================================================================
+// TIME_BuildSummary(): Build Summary
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_BuildSummary;
+        DCL-PARM    UserID          CHAR(10)    CONST;
+        DCL-PARM    EntryDate       ZONED(8:0)  CONST;
+        DCL-PARM    pTSEntryArray   POINTER     CONST;
+        END-PR;
+// ===================================================================================================================================
+// TIME_GetTSDetails(): Get TSDetails
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_GetTSDetails;
+        DCL-PARM    UserID          CHAR(10)    CONST;
+        DCL-PARM    pFromDS         POINTER     CONST;
+        DCL-PARM    pToDS           POINTER     CONST;
+        DCL-PARM    Count           ZONED(5:0);
+        DCL-PARM    pTSDetailsArray POINTER     CONST;
+        END-PR;
+// ===================================================================================================================================
+// TIME_GetTSSummary(): Get TSSummary
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_GetTSSummary;
+        DCL-PARM    UserID          CHAR(10)    CONST;
+        DCL-PARM    pFromSUM        POINTER     CONST;
+        DCL-PARM    pToSUM          POINTER     CONST;
+        DCL-PARM    Count           ZONED(5:0);
+        DCL-PARM    pTSSummaryArray POINTER     CONST;
+        END-PR;
+// ===================================================================================================================================
+// TIME_GetTotalDuration(): Get Total Duration
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_GetTotalDuration;
+        DCL-PARM    UserID          CHAR(10)    CONST;
+        DCL-PARM    EntryDate       ZONED(8:0)  CONST;
+        DCL-PARM    TotalDurationHH ZONED(5:0);
+        DCL-PARM    TotalDurationMM ZONED(5:0);
+        END-PR;
+// ===================================================================================================================================
+// TIME_GetDatabaseArray(): Get Database Array
+// -----------------------------------------------------------------------------------------------------------------------------------
+        DCL-PR      TIME_GetDatabaseArray;
+        DCL-PARM    UserID      CHAR(10)    CONST;
+        DCL-PARM    EntryDate   ZONED(8:0)  CONST;
+        DCL-PARM    Count       ZONED(5:0);
+        DCL-PARM    pTmpArray   POINTER     CONST;
         END-PR;
 // ===================================================================================================================================
