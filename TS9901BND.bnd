@@ -8,5 +8,10 @@
         EXPORT SYMBOL('COMN_CREATEERRORMESSAGETABLE')                  
         EXPORT SYMBOL('COMN_CREATEERRORLOGTABLE')                  
         EXPORT SYMBOL('COMN_LOGERROR')                  
+        EXPORT SYMBOL('COMN_VALIDATEDATE')                  
+        EXPORT SYMBOL('COMN_VALIDATEYEAR')                  
+        EXPORT SYMBOL('COMN_VALIDATEMONTH')                  
+        EXPORT SYMBOL('COMN_VALIDATEDAY')                  
+        EXPORT SYMBOL('COMN_CHECKLEAPYEAR')                  
     ENDPGMEXP                                                         
 /* ================================================================================================================================ */

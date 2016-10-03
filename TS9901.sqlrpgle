@@ -151,3 +151,204 @@
 
     END-PROC;
 // ===================================================================================================================================
+// COMN_ValidateDate(): Validate Date
+// -----------------------------------------------------------------------------------------------------------------------------------
+    DCL-PROC        COMN_ValidateDate EXPORT;
+
+        DCL-PI      COMN_ValidateDate;
+        DCL-PARM    Date        CHAR(8)     CONST;
+        DCL-PARM    DateFormat  CHAR(3)     CONST;
+        DCL-PARM    IsValid     CHAR(1);
+        END-PI;
+        
+        DCL-S   Day     ZONED(2:0);
+        DCL-S   Month   ZONED(2:0);
+        DCL-S   Year    ZONED(4:0);
+
+        SELECT;
+            WHEN    DateFormat  =   'DMY';
+                    Day         =   %dec(%subst(Date:1:2):2:0);
+                    Month       =   %dec(%subst(Date:3:2):2:0);
+                    Year        =   %dec(%subst(Date:5:4):4:0);
+
+            WHEN    DateFormat  =   'MDY';
+                    Month       =   %dec(%subst(Date:1:2):2:0);
+                    Day         =   %dec(%subst(Date:3:2):2:0);
+                    Year        =   %dec(%subst(Date:5:4):4:0);
+
+            WHEN    DateFormat  =   'YMD';
+                    Year        =   %dec(%subst(Date:1:4):4:0);
+                    Month       =   %dec(%subst(Date:5:2):2:0);
+                    Day         =   %dec(%subst(Date:7:2):2:0);
+        ENDSL;
+
+        CALLP   COMN_ValidateYear(Year:IsValid);
+        
+        IF      IsValid = 'Y';
+        CALLP   COMN_ValidateMonth(Month:Year:IsValid);
+        ENDIF;
+        
+        IF      IsValid = 'Y';
+        CALLP   COMN_ValidateDay(Day:Month:Year:IsValid);
+        ENDIF;
+        
+        RETURN;
+
+    END-PROC;
+// ===================================================================================================================================
+// COMN_ValidateYear(): Validate Year
+// -----------------------------------------------------------------------------------------------------------------------------------
+    DCL-PROC        COMN_ValidateYear EXPORT;
+
+        DCL-PI      COMN_ValidateYear;
+        DCL-PARM    Year    ZONED(4:0)  CONST;
+        DCL-PARM    IsValid CHAR(1);
+        END-PI;
+                
+        DCL-S   TmpDate CHAR(8);
+        DCL-S   TmpYear ZONED(4:0);
+
+        //Initialize Variables
+        IsValid =   *Blanks;
+        
+        TmpDate =   %char(%dec(%date));
+        TmpYear =   %dec(%subst(TmpDate:1:4):4:0);
+        
+        IF  Year    >   TmpYear;
+            IsValid =   'N';
+        ELSE;
+            IsValid =   'Y';
+        ENDIF;
+        
+        RETURN;
+
+    END-PROC;
+// ===================================================================================================================================
+// COMN_ValidateMonth(): Validate Month
+// -----------------------------------------------------------------------------------------------------------------------------------
+    DCL-PROC        COMN_ValidateMonth EXPORT;
+
+        DCL-PI      COMN_ValidateMonth;
+        DCL-PARM    Month   ZONED(2:0)  CONST;
+        DCL-PARM    Year    ZONED(4:0)  CONST;
+        DCL-PARM    IsValid CHAR(1);
+        END-PI;
+        
+        DCL-S   TmpDate     CHAR(8);
+        DCL-S   TmpMonth    ZONED(2:0);
+        DCL-S   TmpYear     ZONED(4:0);
+
+        //Initialize Variables
+        IsValid =   *Blanks;
+        
+        TmpDate     =   %char(%dec(%date));
+        TmpMonth    =   %dec(%subst(TmpDate:5:2):2:0);
+        TmpYear     =   %dec(%subst(TmpDate:1:4):4:0);
+
+        SELECT;
+            WHEN    Month   >   TmpMonth    AND
+                    Year    =   TmpYear;
+                    IsValid =   'N';
+
+            WHEN    Month   >   12;
+                    IsValid =   'N';
+
+            OTHER;
+                    IsValid =   'Y';            
+        ENDSL;
+        
+        RETURN;
+
+    END-PROC;
+// ===================================================================================================================================
+// COMN_ValidateDay(): Validate Day
+// -----------------------------------------------------------------------------------------------------------------------------------
+    DCL-PROC        COMN_ValidateDay EXPORT;
+
+        DCL-PI      COMN_ValidateDay;
+        DCL-PARM    Day     ZONED(2:0)  CONST;
+        DCL-PARM    Month   ZONED(2:0)  CONST;
+        DCL-PARM    Year    ZONED(4:0)  CONST;
+        DCL-PARM    IsValid CHAR(1);
+        END-PI;
+        
+        DCL-S   TmpDate     CHAR(8);
+        DCL-S   TmpDay      ZONED(2:0);
+        DCL-S   TmpMonth    ZONED(2:0);
+        DCL-S   TmpYear     ZONED(4:0);
+        DCL-S   LeapYear    CHAR(1);
+
+        //Initialize Variables
+        IsValid =   *Blanks;
+        
+        TmpDate     =   %char(%dec(%date));
+        TmpDay      =   %dec(%subst(TmpDate:7:2):2:0);
+        TmpMonth    =   %dec(%subst(TmpDate:5:2):2:0);
+        TmpYear     =   %dec(%subst(TmpDate:1:4):4:0);
+        
+        CALLP   COMN_CheckLeapYear(Year:LeapYear);
+        
+        SELECT;
+            WHEN    Day         >   TmpDay      AND
+                    Month       =   TmpMonth    AND
+                    Year        =   TmpYear;
+                    IsValid     =   'N';
+        
+            WHEN    Day         >   31;
+                    IsValid     =   'N';
+        
+            WHEN    Day         >   30;
+
+                IF  Month       =   4           OR
+                    Month       =   6           OR
+                    Month       =   9           OR
+                    Month       =   11;
+                    IsValid     =   'N';
+                ENDIF;
+
+            WHEN    LeapYear    =   'Y'         AND
+                    Month       =   2           AND
+                    Day         >   29;
+                    IsValid     =   'N';
+        
+            WHEN    LeapYear    =   'N'         AND
+                    Month       =   2           AND
+                    Day         >   28;
+                    IsValid     =   'N';
+
+            OTHER;
+                    IsValid     =   'Y';
+        ENDSL;
+            
+        RETURN;
+
+    END-PROC;
+// ===================================================================================================================================
+// COMN_CheckLeapYear(): Check Leap Year
+// -----------------------------------------------------------------------------------------------------------------------------------
+    DCL-PROC        COMN_CheckLeapYear EXPORT;
+
+        DCL-PI      COMN_CheckLeapYear;
+        DCL-PARM    Year        ZONED(4:0)  CONST;
+        DCL-PARM    LeapYear    CHAR(1);
+        END-PI;
+
+        //Initialize Variables
+        LeapYear    =   *Blanks;
+        
+        SELECT;
+            WHEN    %rem(Year:400)  =   *Zeros;
+                    LeapYear        =   'Y';
+
+            WHEN    %rem(Year:4)    =   *Zeros  AND
+                    %rem(Year:100)  <>  *Zeros;
+                    LeapYear        =   'Y';
+
+            OTHER;
+                    LeapYear        =   'N';
+        ENDSL;
+
+        RETURN;
+
+    END-PROC;
+// ===================================================================================================================================
