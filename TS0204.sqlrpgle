@@ -146,64 +146,50 @@
             LEAVESR;
         ENDIF;
 
-        IF  FromDTL.EntryDate   >   ToDTL.EntryDate;
-            ValidScr01          =   'N';
-            ErrorID             =   29;         //From Date > To Date.
-            EXSR    GetErrorMsg;
-            LEAVESR;
-        ENDIF;
+        SELECT;
+            WHEN    FromDTL.EntryDate   >   ToDTL.EntryDate;
+                    ValidScr01          =   'N';
+                    ErrorID             =   29;         //From Date > To Date.
+                    EXSR    GetErrorMsg;
 
-        IF  FromDTL.ActID       >   ToDTL.ActID;
-            ValidScr01          =   'N';
-            ErrorID             =   30;         //From Activity ID > To Activity ID.
-            EXSR    GetErrorMsg;
-            LEAVESR;
-        ENDIF;
+            WHEN    FromDTL.ActID       >   ToDTL.ActID;
+                    ValidScr01          =   'N';
+                    ErrorID             =   30;         //From Activity ID > To Activity ID.
+                    EXSR    GetErrorMsg;
 
-        IF  FromDTL.StartHH     >   ToDTL.StartHH;
-            ValidScr01          =   'N';
-            ErrorID             =   31;         //From Start Time > To Start Time.
-            EXSR    GetErrorMsg;
-            LEAVESR;
-        ENDIF;
-                
-        IF  FromDTL.StartHH     =   ToDTL.StartHH   AND
-            FromDTL.StartMM     >   ToDTL.StartMM;
-            ValidScr01          =   'N';
-            ErrorID             =   31;         //From Start Time > To Start Time.
-            EXSR    GetErrorMsg;
-            LEAVESR;
-        ENDIF;
-                
-        IF  FromDTL.EndHH       >   ToDTL.EndHH;
-            ValidScr01          =   'N';
-            ErrorID             =   32;         //From End Time > To End Time.
-            EXSR    GetErrorMsg;
-            LEAVESR;
-        ENDIF;
+            WHEN    FromDTL.StartHH     >   ToDTL.StartHH;
+                    ValidScr01          =   'N';
+                    ErrorID             =   31;         //From Start Time > To Start Time.
+                    EXSR    GetErrorMsg;
 
-        IF  FromDTL.EndHH       =   ToDTL.EndHH     AND
-            FromDTL.EndMM       >   ToDTL.EndMM;
-            ValidScr01          =   'N';
-            ErrorID             =   32;         //From End Time > To End Time.
-            EXSR    GetErrorMsg;
-            LEAVESR;
-        ENDIF;
+            WHEN    FromDTL.StartHH     =   ToDTL.StartHH   AND
+                    FromDTL.StartMM     >   ToDTL.StartMM;
+                    ValidScr01          =   'N';
+                    ErrorID             =   31;         //From Start Time > To Start Time.
+                    EXSR    GetErrorMsg;
 
-        IF  FromDTL.DrtnHH      >   ToDTL.DrtnHH;
-            ValidScr01          =   'N';
-            ErrorID             =   33;         //From Duration > To Duration.
-            EXSR    GetErrorMsg;
-            LEAVESR;
-        ENDIF;
+            WHEN    FromDTL.EndHH       >   ToDTL.EndHH;
+                    ValidScr01          =   'N';
+                    ErrorID             =   32;         //From End Time > To End Time.
+                    EXSR    GetErrorMsg;
 
-        IF  FromDTL.DrtnHH      =   ToDTL.DrtnHH    AND
-            FromDTL.DrtnMM      >   ToDTL.DrtnMM;
-            ValidScr01          =   'N';
-            ErrorID             =   33;         //From Duration > To Duration.
-            EXSR    GetErrorMsg;
-            LEAVESR;
-        ENDIF;
+            WHEN    FromDTL.EndHH       =   ToDTL.EndHH     AND
+                    FromDTL.EndMM       >   ToDTL.EndMM;
+                    ValidScr01          =   'N';
+                    ErrorID             =   32;         //From End Time > To End Time.
+                    EXSR    GetErrorMsg;
+
+            WHEN    FromDTL.DrtnHH      >   ToDTL.DrtnHH;
+                    ValidScr01          =   'N';
+                    ErrorID             =   33;         //From Duration > To Duration.
+                    EXSR    GetErrorMsg;
+
+            WHEN    FromDTL.DrtnHH      =   ToDTL.DrtnHH    AND
+                    FromDTL.DrtnMM      >   ToDTL.DrtnMM;
+                    ValidScr01          =   'N';
+                    ErrorID             =   33;         //From Duration > To Duration.
+                    EXSR    GetErrorMsg;
+        ENDSL;
 
     ENDSR;
 // ===================================================================================================================================
