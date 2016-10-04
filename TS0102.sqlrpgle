@@ -170,16 +170,14 @@
             ValidScr01  =   'N';
             F12Pressed  =   'N';
             LEAVESR;
-        ELSE;
+        ENDIF;
             
-            IF  ProtectFields   =   'N';
-                EXSR    ElementCheck;
-                EXSR    OnScreenCheck;
-                EXSR    ComputeParameter;
-                EXSR    DatabaseCheck;
-                EXSR    TotalHoursCheck;
-            ENDIF;
-
+        IF  ProtectFields   =   'N';
+            EXSR    ElementCheck;
+            EXSR    OnScreenCheck;
+            EXSR    ComputeParameter;
+            EXSR    DatabaseCheck;
+            EXSR    TotalHoursCheck;
         ENDIF;
 
         IF  ValidScr01  =   'Y';
@@ -191,10 +189,6 @@
 // Element Check
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   ElementCheck;
-
-        IF  ValidScr01  =   'N';
-            LEAVESR;
-        ENDIF;
 
         EXSR    VldtDate;
 
@@ -215,24 +209,20 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   VldtDate;
 
-        IF  ValidScr01  =   'N';
-            LEAVESR;
-        ENDIF;
-
         IF  EntryDate   =   *Zeros;
             ValidScr01  =   'N';
             ErrorID     =   28;         //Date is blank.
             EXSR    GetErrorMsg;
-            LEAVESR;
-        ENDIF;
+        ELSE;
 
-        CALLP   COMN_ValidateDate(%editc(EntryDate:'X'):UserProfileDS.PR1001:IsValid);
+            CALLP   COMN_ValidateDate(%editc(EntryDate:'X'):UserProfileDS.PR1001:IsValid);
         
-        IF  IsValid     =   'N';
-            ValidScr01  =   'N';
-            ErrorID     =   18;         //Date is invalid.
-            EXSR    GetErrorMsg;
-            LEAVESR;
+            IF  IsValid     =   'N';
+                ValidScr01  =   'N';
+                ErrorID     =   18;         //Date is invalid.
+                EXSR    GetErrorMsg;
+            ENDIF;
+        
         ENDIF;
         
     ENDSR;
@@ -253,7 +243,6 @@
                 ErrorID         =   9;         //Activity ID is invalid.
                 EXSR    GetErrorMsg;
                 ErrorLine       =   Index;
-                LEAVESR;
             ELSE;
                 TSEntryArray(Index).Activity    =   UserActsDS.Activity;
             ENDIF;
@@ -272,7 +261,6 @@
                             ErrorID     =   19;                         //Activity ID is blank.
                             EXSR    GetErrorMsg;
                             ErrorLine   =   Index;
-                            LEAVESR;
                         ENDIF;
 
                 WHEN    TSEntryArray(Index).EndHH       <>  *Zeros  OR
@@ -284,7 +272,6 @@
                             ErrorID     =   19;                         //Activity ID is blank.
                             EXSR    GetErrorMsg;
                             ErrorLine   =   Index;
-                            LEAVESR;
                         ENDIF;
 
                 WHEN    TSEntryArray(Index).DurationHH  <>  *Zeros  OR
@@ -297,7 +284,6 @@
                             ErrorID     =   19;                         //Activity ID is blank.
                             EXSR    GetErrorMsg;
                             ErrorLine   =   Index;
-                            LEAVESR;
                         ENDIF;
             ENDSL;
 
@@ -319,7 +305,6 @@
             ErrorID     =   20;         //Start Time is invalid.
             EXSR    GetErrorMsg;
             ErrorLine   =   Index;
-            LEAVESR;
         ELSE;
             CALLP   TIME_ValidateStartTime(TSEntryArray(Index).StartHH:TSEntryArray(Index).StartMM:IsValid:ErrorID);
 
@@ -327,7 +312,6 @@
                 ValidScr01  =   'N';
                 EXSR    GetErrorMsg;
                 ErrorLine   =   Index;
-                LEAVESR;
             ENDIF;
 
         ENDIF;
@@ -352,7 +336,6 @@
                 ErrorID     =   21;                         //End Time is blank.
                 EXSR    GetErrorMsg;
                 ErrorLine   =   Index;
-                LEAVESR;
             ENDIF;
 
         ELSE;
@@ -362,7 +345,6 @@
                 ValidScr01  =   'N';
                 EXSR    GetErrorMsg;
                 ErrorLine   =   Index;
-                LEAVESR;
             ENDIF;
 
         ENDIF;
@@ -386,7 +368,6 @@
                 ErrorID     =   22;                     //Duration is blank.
                 EXSR    GetErrorMsg;
                 ErrorLine   =   Index;
-                LEAVESR;
             ENDIF;
 
         ELSE;
@@ -396,7 +377,6 @@
                 ValidScr01  =   'N';
                 EXSR    GetErrorMsg;
                 ErrorLine   =   Index;
-                LEAVESR;
             ENDIF;
 
         ENDIF;
@@ -695,7 +675,6 @@
         ELSE;
             EXSR    WriteToDB;
             EXSR    InitScreen;
-
         ENDIF;
 
     ENDSR;
