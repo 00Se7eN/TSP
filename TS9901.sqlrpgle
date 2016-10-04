@@ -297,15 +297,6 @@
             WHEN    Day         >   31;
                     IsValid     =   'N';
         
-            WHEN    Day         >   30;
-
-                IF  Month       =   4           OR
-                    Month       =   6           OR
-                    Month       =   9           OR
-                    Month       =   11;
-                    IsValid     =   'N';
-                ENDIF;
-
             WHEN    LeapYear    =   'Y'         AND
                     Month       =   2           AND
                     Day         >   29;
@@ -315,6 +306,15 @@
                     Month       =   2           AND
                     Day         >   28;
                     IsValid     =   'N';
+
+            WHEN    Day         >   30;
+
+                    IF  Month   =   4           OR
+                        Month   =   6           OR
+                        Month   =   9           OR
+                        Month   =   11;
+                        IsValid =   'N';
+                    ENDIF;
 
             OTHER;
                     IsValid     =   'Y';
