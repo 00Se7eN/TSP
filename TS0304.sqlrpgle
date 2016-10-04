@@ -138,27 +138,28 @@
             LEAVESR;
         ENDIF;
 
-        IF  FromSUM.EntryDate   >   ToSUM.EntryDate AND
-            ValidScr01          =   'N';
-            ErrorID             =   29;         //From Date > To Date.
-            EXSR    GetErrorMsg;
-            LEAVESR;
-        ENDIF;
+        SELECT;
+            WHEN    FromSUM.EntryDate   >   ToSUM.EntryDate;
+                    ValidScr01          =   'N';
+                    ErrorID             =   29;         //From Date > To Date.
+                    EXSR    GetErrorMsg;
 
-        IF  FromSUM.ActID       >   ToSUM.ActID     AND
-            ValidScr01          =   'N';
-            ErrorID             =   30;         //From Activity ID > To Activity ID.
-            EXSR    GetErrorMsg;
-            LEAVESR;
-        ENDIF;
+            WHEN    FromSUM.ActID       >   ToSUM.ActID;
+                    ValidScr01          =   'N';
+                    ErrorID             =   30;         //From Activity ID > To Activity ID.
+                    EXSR    GetErrorMsg;
 
-        IF  FromSUM.DrtnHH      >   ToSUM.DrtnHH    AND
-            FromSUM.DrtnMM      >   ToSUM.DrtnMM;
-            ValidScr01          =   'N';
-            ErrorID             =   33;         //From Duration > To Duration.
-            EXSR    GetErrorMsg;
-            LEAVESR;
-        ENDIF;
+            WHEN    FromSUM.DrtnHH      >   ToSUM.DrtnHH;
+                    ValidScr01          =   'N';
+                    ErrorID             =   33;         //From Duration > To Duration.
+                    EXSR    GetErrorMsg;
+
+            WHEN    FromSUM.DrtnHH      =   ToSUM.DrtnHH    AND
+                    FromSUM.DrtnMM      >   ToSUM.DrtnMM;
+                    ValidScr01          =   'N';
+                    ErrorID             =   33;         //From Duration > To Duration.
+                    EXSR    GetErrorMsg;
+        ENDSL;
                 
     ENDSR;
 // ===================================================================================================================================
