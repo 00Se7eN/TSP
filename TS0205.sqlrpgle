@@ -73,7 +73,7 @@
     DCL-PR      TS0205;
     DCL-PARM    pFromDTL    POINTER;
     DCL-PARM    pToDTL      POINTER;
-    DCL-PARM    F3Pressed   CHAR(1);
+    DCL-PARM    F12Pressed  CHAR(1);
     DCL-PARM    Message     CHAR(78);
     DCL-PARM    ErrorID     ZONED(5:0);
     END-PR;
@@ -83,7 +83,7 @@
     DCL-PI      TS0205;
     DCL-PARM    pFromDTL    POINTER;
     DCL-PARM    pToDTL      POINTER;
-    DCL-PARM    F3Pressed   CHAR(1);
+    DCL-PARM    F12Pressed  CHAR(1);
     DCL-PARM    Message     CHAR(78);
     DCL-PARM    ErrorID     ZONED(5:0);
     END-PI;
@@ -196,8 +196,8 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   SetRtrnParms;
 
-        IF  *In03               =   *On;
-            F3Pressed           =   'Y';
+        IF  *In12               =   *On;
+            F12Pressed          =   'Y';
         ELSE;
             // Move Screen Fields to Database Fields
             FromDTL.EntryDate   =   FROMDATE;
@@ -217,6 +217,38 @@
             ToDTL.EndMM         =   TOENDM;
             ToDTL.DrtnHH        =   TODRTNH;
             ToDTL.DrtnMM        =   TODRTNM;
+        ENDIF;
+
+        IF  ToDTL.EntryDate =   *Zeros;
+            ToDTL.EntryDate =   99999999;
+        ENDIF;
+
+        IF  ToDTL.ActID     =   *Zeros;
+            ToDTL.ActID     =   99999;
+        ENDIF;
+
+        IF  ToDTL.StartHH   =   *Zeros;
+            ToDTL.StartHH   =   99;
+        ENDIF;
+
+        IF  ToDTL.StartMM   =   *Zeros;
+            ToDTL.StartMM   =   99;
+        ENDIF;
+
+        IF  ToDTL.EndHH     =   *Zeros;
+            ToDTL.EndHH     =   99;
+        ENDIF;
+
+        IF  ToDTL.EndMM     =   *Zeros;
+            ToDTL.EndMM     =   99;
+        ENDIF;
+
+        IF  ToDTL.DrtnHH    =   *Zeros;
+            ToDTL.DrtnHH    =   99;
+        ENDIF;
+
+        IF  ToDTL.DrtnMM    =   *Zeros;
+            ToDTL.DrtnMM    =   99;
         ENDIF;
 
     ENDSR;

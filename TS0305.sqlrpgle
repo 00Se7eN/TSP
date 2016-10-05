@@ -65,7 +65,7 @@
     DCL-PR      TS0305;
     DCL-PARM    pFromSUM    POINTER;
     DCL-PARM    pToSUM      POINTER;
-    DCL-PARM    F3Pressed   CHAR(1);
+    DCL-PARM    F12Pressed  CHAR(1);
     DCL-PARM    Message     CHAR(78);
     DCL-PARM    ErrorID     ZONED(5:0);
     END-PR;
@@ -75,7 +75,7 @@
     DCL-PI      TS0305;
     DCL-PARM    pFromSUM    POINTER;
     DCL-PARM    pToSUM      POINTER;
-    DCL-PARM    F3Pressed   CHAR(1);
+    DCL-PARM    F12Pressed  CHAR(1);
     DCL-PARM    Message     CHAR(78);
     DCL-PARM    ErrorID     ZONED(5:0);
     END-PI;
@@ -172,8 +172,8 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   SetRtrnParms;
 
-        IF  *In03               =   *On;
-            F3Pressed           =   'Y';
+        IF  *In12               =   *On;
+            F12Pressed          =   'Y';
         ELSE;
             // Move Screen Fields to Database Fields
             FromSUM.EntryDate   =   FROMDATE;
@@ -185,6 +185,22 @@
             ToSUM.ActID         =   TOACTID;
             ToSUM.DrtnHH        =   TODRTNH;
             ToSUM.DrtnMM        =   TODRTNM;
+        ENDIF;
+
+        IF  ToSUM.EntryDate =   *Zeros;
+            ToSUM.EntryDate =   99999999;
+        ENDIF;
+
+        IF  ToSUM.ActID     =   *Zeros;
+            ToSUM.ActID     =   99999;
+        ENDIF;
+
+        IF  ToSUM.DrtnHH    =   *Zeros;
+            ToSUM.DrtnHH    =   99;
+        ENDIF;
+
+        IF  ToSUM.DrtnMM    =   *Zeros;
+            ToSUM.DrtnMM    =   99;
         ENDIF;
 
     ENDSR;

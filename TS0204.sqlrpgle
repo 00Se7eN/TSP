@@ -61,7 +61,7 @@
 // Switches
 // -----------------------------------------------------------------------------------------------------------------------------------
     DCL-S   ExitProgram     CHAR(1);
-    DCL-S   F3Pressed       CHAR(1);
+    DCL-S   F12Pressed      CHAR(1);
     DCL-S   ValidScr01      CHAR(1);
 // ===================================================================================================================================
 // Prototypes
@@ -76,7 +76,7 @@
     DCL-PR      TS0205      EXTPGM;
     DCL-PARM    pFromDTL    POINTER;
     DCL-PARM    pToDTL      POINTER;
-    DCL-PARM    F3Pressed   CHAR(1);
+    DCL-PARM    F12Pressed  CHAR(1);
     DCL-PARM    Message     CHAR(78);
     DCL-PARM    ErrorID     ZONED(5:0);
     END-PR;
@@ -140,9 +140,9 @@
         ErrorID     =   *Zeros;
         ValidScr01  =   'Y';
 
-        IF  F3Pressed   =   'Y';
+        IF  F12Pressed   =   'Y';
             ExitProgram =   'Y';
-            F3Pressed   =   'N';
+            F12Pressed   =   'N';
             LEAVESR;
         ENDIF;
 
@@ -191,13 +191,17 @@
                     EXSR    GetErrorMsg;
         ENDSL;
 
+        IF  ValidScr01  =   'Y';
+            ExitProgram =   'Y';
+        ENDIF;
+
     ENDSR;
 // ===================================================================================================================================
 // Call View
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   CallView;
 
-        TS0205(pFromDTL:pToDTL:F3Pressed:Message:ErrorID);
+        TS0205(pFromDTL:pToDTL:F12Pressed:Message:ErrorID);
 
     ENDSR;
 // ===================================================================================================================================
