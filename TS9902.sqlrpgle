@@ -266,7 +266,7 @@
         DCL-S   TmpActivityID   ZONED(5:0);
         DCL-S   TmpActivity     CHAR(50);
 
-        DCL-DS  ActivitiesArray BASED(pActivitiesArray) DIM(9) QUALIFIED;
+        DCL-DS  ActivitiesArray BASED(pActivitiesArray) DIM(999) QUALIFIED;
                 Opt             ZONED(1:0);
                 User            CHAR(10);
                 ActivityID      ZONED(5:0);
@@ -280,7 +280,8 @@
         EXEC SQL
         DECLARE C1  CURSOR  FOR
                     SELECT  *   FROM    USRACTS
-                                WHERE   USER    =   :UserID;
+                                WHERE   USER    =   :UserID
+                                ORDER   BY  ACTID;
 
         EXEC SQL
         OPEN C1;
@@ -645,7 +646,8 @@
 
             EndTime =   %editc(TSEntryArray(Index).EndHH:'X') + '.' + %editc(TSEntryArray(Index).EndMM:'X') + '.' + '00';
 
-            StartTime   =   %char((%time(EndTime:*ISO) - %hours(TSEntryArray(Index).DurationHH) - %minutes(TSEntryArray(Index).DurationMM)):*ISO);
+            StartTime   =   %char((%time(EndTime:*ISO) - %hours(TSEntryArray(Index).DurationHH)):*ISO);
+            StartTime   =   %char((%time(StartTime:*ISO) - %minutes(TSEntryArray(Index).DurationMM)):*ISO);
 
             TSEntryArray(Index).StartHH   =   %dec(%subst(StartTime:1:2):2:0);
             TSEntryArray(Index).StartMM   =   %dec(%subst(StartTime:4:2):2:0);
@@ -685,7 +687,8 @@
 
             StartTime   =   %editc(TSEntryArray(Index).StartHH:'X') + '.' + %editc(TSEntryArray(Index).StartMM:'X') + '.' + '00';
 
-            EndTime =   %char((%time(StartTime:*ISO) + %hours(TSEntryArray(Index).DurationHH) + %minutes(TSEntryArray(Index).DurationMM)):*ISO);
+            EndTime =   %char((%time(StartTime:*ISO) + %hours(TSEntryArray(Index).DurationHH)):*ISO);
+            EndTime =   %char((%time(EndTime:*ISO) + %minutes(TSEntryArray(Index).DurationMM)):*ISO);
 
             TSEntryArray(Index).EndHH   =   %dec(%subst(EndTime:1:2):2:0);
             TSEntryArray(Index).EndMM   =   %dec(%subst(EndTime:4:2):2:0);
@@ -725,7 +728,8 @@
 
             EndTime =   %editc(TSEntryArray(Index).EndHH:'X') + '.' + %editc(TSEntryArray(Index).EndMM:'X') + '.' + '00';
 
-            Duration    =   %char((%time(EndTime:*ISO) - %hours(TSEntryArray(Index).StartHH) + %minutes(TSEntryArray(Index).StartMM)):*ISO);
+            Duration    =   %char((%time(EndTime:*ISO) - %hours(TSEntryArray(Index).StartHH)):*ISO);
+            Duration    =   %char((%time(Duration:*ISO) - %minutes(TSEntryArray(Index).StartMM)):*ISO);
 
             TSEntryArray(Index).DurationHH  =   %dec(%subst(Duration:1:2):2:0);
             TSEntryArray(Index).DurationMM  =   %dec(%subst(Duration:4:2):2:0);
