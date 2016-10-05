@@ -19,7 +19,7 @@
 // ===================================================================================================================================
 // Arrays
 // -----------------------------------------------------------------------------------------------------------------------------------
-    DCL-DS  ActivitiesArray BASED(pActivitiesArray) DIM(9) QUALIFIED;
+    DCL-DS  ActivitiesArray BASED(pActivitiesArray) DIM(999) QUALIFIED;
             Opt             ZONED(1:0);
             User            CHAR(10);
             ActivityID      ZONED(5:0);

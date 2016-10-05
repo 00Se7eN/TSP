@@ -18,7 +18,7 @@
 // ===================================================================================================================================
 // Arrays
 // -----------------------------------------------------------------------------------------------------------------------------------
-    DCL-DS  ActivitiesArray LIKEDS(ActivityDS) DIM(9);
+    DCL-DS  ActivitiesArray LIKEDS(ActivityDS) DIM(999);
 // ===================================================================================================================================
 // Internal Data Structures
 // -----------------------------------------------------------------------------------------------------------------------------------
@@ -46,10 +46,15 @@
     DCL-S   pActivityDS         POINTER     INZ(%addr(ActivityDS));
     DCL-S   PosDesc             CHAR(50);
     DCL-S   PosID               ZONED(5:0);
+    DCL-S   SortBy              CHAR(10);
     DCL-S   StrLength           ZONED(2:0);
+    DCL-S   TmpActivity         CHAR(50);
+    DCL-S   TmpActivityID       ZONED(5:0);
     DCL-S   TmpCount            ZONED(5:0);
     DCL-S   TmpDesc             CHAR(50);
     DCL-S   TmpDSLRD            ZONED(4:0)  INZ(1);
+    DCL-S   TmpOpt              ZONED(1:0);
+    DCL-S   TmpUser             CHAR(10);
     DCL-S   UserID              CHAR(10)    INZ(*USER);
 // ===================================================================================================================================
 // Constants
@@ -57,13 +62,14 @@
 // ===================================================================================================================================
 // Switches
 // -----------------------------------------------------------------------------------------------------------------------------------
-    DCL-S   ExitProgram CHAR(1);
-    DCL-S   F3Pressed   CHAR(1);
-    DCL-S   F5Pressed   CHAR(1);
-    DCL-S   F6Pressed   CHAR(1);
-    DCL-S   F13Pressed  CHAR(1);
-    DCL-S   FKeyPressed CHAR(1);
-    DCL-S   ValidScr01  CHAR(1);
+    DCL-S   ExitProgram     CHAR(1);
+    DCL-S   F3Pressed       CHAR(1);
+    DCL-S   F5Pressed       CHAR(1);
+    DCL-S   F6Pressed       CHAR(1);
+    DCL-S   F13Pressed      CHAR(1);
+    DCL-S   FKeyPressed     CHAR(1);
+    DCL-S   ProcessArray    CHAR(1);
+    DCL-S   ValidScr01      CHAR(1);
 // ===================================================================================================================================
 // Prototypes
 // -----------------------------------------------------------------------------------------------------------------------------------
@@ -179,11 +185,14 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   ProcPosID;
 
+        SortBy  =   'ActID';
+        EXSR    SortArray;
+
             TmpCount    =   *Zeros;
         DOW TmpCount    <   Count;
             TmpCount    =   TmpCount + 1;
 
-            IF  ActivitiesArray(TmpCount).ActivityID    =   PosID;
+            IF  ActivitiesArray(TmpCount).ActivityID    >=  PosID;
                 TmpDSLRD    =   TmpCount;
                 Message     =   *Blanks;
                 PosID       =   *Zeros;
@@ -202,6 +211,9 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   ProcPosDesc;
 
+        SortBy  =   'ActDesc';
+        EXSR    SortArray;
+
             StrLength   =   *Zeros;
             StrLength   =   %len(%trimr(PosDesc));
 
@@ -212,7 +224,7 @@
             TmpDesc =   *Blanks;
             TmpDesc =   %subst(ActivitiesArray(TmpCount).Activity:1:StrLength);
 
-            IF  TmpDesc     =   PosDesc;
+            IF  TmpDesc     >=  PosDesc;
                 TmpDSLRD    =   TmpCount;
                 Message     =   *Blanks;
                 PosDesc     =   *Blanks;
@@ -223,6 +235,62 @@
 
         ErrorID =   10;          //Activity Description is invalid.
         EXSR    GetErrorMsg;
+
+    ENDSR;
+// ===================================================================================================================================
+// Sort Array
+// -----------------------------------------------------------------------------------------------------------------------------------
+    BEGSR   SortArray;
+
+            ProcessArray    =   'Y';
+        DOW ProcessArray    =   'Y';
+            ProcessArray    =   'N';
+
+                TmpCount        =   *Zeros;
+            DOW TmpCount + 1    <   Count;
+                TmpCount        =   Tmpcount + 1;
+
+                SELECT;
+                    WHEN    SortBy  =   'ActID';
+
+                            IF  ActivitiesArray(TmpCount).ActivityID    >   ActivitiesArray(TmpCount+1).ActivityID;
+                                EXSR    SwitchFields;
+                                ProcessArray    =   'Y';
+                            ENDIF;
+
+                    WHEN    SortBy  =   'ActDesc';
+
+                            IF  ActivitiesArray(TmpCount).Activity      >   ActivitiesArray(TmpCount+1).Activity;
+                                EXSR    SwitchFields;
+                                ProcessArray    =   'Y';
+                            ENDIF;
+
+                ENDSL;
+
+            ENDDO;
+
+        ENDDO;
+
+    ENDSR;
+// ===================================================================================================================================
+// Switch Fields
+// -----------------------------------------------------------------------------------------------------------------------------------
+    BEGSR   SwitchFields;
+
+        TmpOpt                                  =   ActivitiesArray(TmpCount).Opt;
+        TmpUser                                 =   ActivitiesArray(TmpCount).User;
+        TmpActivityID                           =   ActivitiesArray(TmpCount).ActivityID;
+        TmpActivity                             =   ActivitiesArray(TmpCount).Activity;
+
+        ActivitiesArray(TmpCount).Opt           =   ActivitiesArray(TmpCount+1).Opt;
+        ActivitiesArray(TmpCount).User          =   ActivitiesArray(TmpCount+1).User;
+        ActivitiesArray(TmpCount).ActivityID    =   ActivitiesArray(TmpCount+1).ActivityID;
+        ActivitiesArray(TmpCount).Activity      =   ActivitiesArray(TmpCount+1).Activity;
+
+        ActivitiesArray(TmpCount+1).Opt         =   TmpOpt;
+        ActivitiesArray(TmpCount+1).User        =   TmpUser;
+        ActivitiesArray(TmpCount+1).ActivityID  =   TmpActivityID;
+        ActivitiesArray(TmpCount+1).Activity    =   TmpActivity;
 
     ENDSR;
 // ===================================================================================================================================
