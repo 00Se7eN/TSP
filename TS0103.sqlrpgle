@@ -261,164 +261,189 @@
             WHEN    ErrorID =   9   OR          //Activity ID is invalid.
                     ErrorID =   19;             //Activity ID is blank.
 
-                SELECT;
-                    WHEN    ErrorLine   =   1;
-                            *In52       =   *On;
-                    
-                    WHEN    ErrorLine   =   2;
-                            *In59       =   *On;
-
-                    WHEN    ErrorLine   =   3;
-                            *In66       =   *On;
-
-                    WHEN    ErrorLine   =   4;
-                            *In73       =   *On;
-
-                    WHEN    ErrorLine   =   5;
-                            *In80       =   *On;
-                ENDSL;
+                    SELECT;
+                        WHEN    ErrorLine   =   1;
+                                *In52       =   *On;
+                        
+                        WHEN    ErrorLine   =   2;
+                                *In59       =   *On;
+    
+                        WHEN    ErrorLine   =   3;
+                                *In66       =   *On;
+    
+                        WHEN    ErrorLine   =   4;
+                                *In73       =   *On;
+    
+                        WHEN    ErrorLine   =   5;
+                                *In80       =   *On;
+                    ENDSL;
 
             WHEN    ErrorID =   20  OR          //Start Time is invalid.
                     ErrorID =   12  OR          //Start Hours is invalid.
                     ErrorID =   23  OR          //Start Time > End Time.
-                    ErrorID =   35  OR          //Start Time or Duration is invalid.
-                    ErrorID =   36;             //Start Time = End Time.
+                    ErrorID =   34;             //Start Time = End Time.
 
-                SELECT;
-                    WHEN    ErrorLine   =   1;
-                            *In53       =   *On;
-                    
-                    WHEN    ErrorLine   =   2;
-                            *In60       =   *On;
-
-                    WHEN    ErrorLine   =   3;
-                            *In67       =   *On;
-
-                    WHEN    ErrorLine   =   4;
-                            *In74       =   *On;
-
-                    WHEN    ErrorLine   =   5;
-                            *In81       =   *On;
-                ENDSL;
+                    SELECT;
+                        WHEN    ErrorLine   =   1;
+                                *In53       =   *On;
+                        
+                        WHEN    ErrorLine   =   2;
+                                *In60       =   *On;
+    
+                        WHEN    ErrorLine   =   3;
+                                *In67       =   *On;
+    
+                        WHEN    ErrorLine   =   4;
+                                *In74       =   *On;
+    
+                        WHEN    ErrorLine   =   5;
+                                *In81       =   *On;
+                    ENDSL;
 
             WHEN    ErrorID =   13;             //Start Minutes is invalid.
 
-                SELECT;
-                    WHEN    ErrorLine   =   1;
-                            *In54       =   *On;
-                    
-                    WHEN    ErrorLine   =   2;
-                            *In61       =   *On;
-
-                    WHEN    ErrorLine   =   3;
-                            *In68       =   *On;
-
-                    WHEN    ErrorLine   =   4;
-                           *In75        =   *On;
-
-                    WHEN    ErrorLine   =   5;
-                            *In82       =   *On;
-                ENDSL;
+                    SELECT;
+                        WHEN    ErrorLine   =   1;
+                                *In54       =   *On;
+                        
+                        WHEN    ErrorLine   =   2;
+                                *In61       =   *On;
+    
+                        WHEN    ErrorLine   =   3;
+                                *In68       =   *On;
+    
+                        WHEN    ErrorLine   =   4;
+                               *In75        =   *On;
+    
+                        WHEN    ErrorLine   =   5;
+                                *In82       =   *On;
+                    ENDSL;
 
             WHEN    ErrorID =   21  OR          //End Time is blank.
-                    ErrorID =   14  OR          //End Hours is invalid.
-                    ErrorID =   26  OR          //End Time or Duration is invalid.
-                    ErrorID =   34;             //End Time is invalid.
+                    ErrorID =   14;             //End Hours is invalid.
 
-                SELECT;
-                    WHEN    ErrorLine   =   1;
-                            *In55       =   *On;
-                    
-                    WHEN    ErrorLine   =   2;
-                            *In62       =   *On;
-
-                    WHEN    ErrorLine   =   3;
-                            *In69       =   *On;
-
-                    WHEN    ErrorLine   =   4;
-                            *In76       =   *On;
-
-                    WHEN    ErrorLine   =   5;
-                            *In83       =   *On;
-                ENDSL;
+                    SELECT;
+                        WHEN    ErrorLine   =   1;
+                                *In55       =   *On;
+                        
+                        WHEN    ErrorLine   =   2;
+                                *In62       =   *On;
+    
+                        WHEN    ErrorLine   =   3;
+                                *In69       =   *On;
+    
+                        WHEN    ErrorLine   =   4;
+                                *In76       =   *On;
+    
+                        WHEN    ErrorLine   =   5;
+                                *In83       =   *On;
+                    ENDSL;
 
             WHEN    ErrorID =   15;             //End Minutes is invalid.
 
-                SELECT;
-                    WHEN    ErrorLine   =   1;
-                            *In56       =   *On;
-                    
-                    WHEN    ErrorLine   =   2;
-                            *In63       =   *On;
-
-                    WHEN    ErrorLine   =   3;
-                            *In70       =   *On;
-
-                    WHEN    ErrorLine   =   4;
-                            *In77       =   *On;
-
-                    WHEN    ErrorLine   =   5;
-                            *In84       =   *On;
-                ENDSL;
+                    SELECT;
+                        WHEN    ErrorLine   =   1;
+                                *In56       =   *On;
+                        
+                        WHEN    ErrorLine   =   2;
+                                *In63       =   *On;
+    
+                        WHEN    ErrorLine   =   3;
+                                *In70       =   *On;
+    
+                        WHEN    ErrorLine   =   4;
+                                *In77       =   *On;
+    
+                        WHEN    ErrorLine   =   5;
+                                *In84       =   *On;
+                    ENDSL;
 
             WHEN    ErrorID =   22  OR          //Duration is blank.
                     ErrorID =   16  OR          //Duration Hours is invalid.
                     ErrorID =   24  OR          //Duration > Maximum Duration.
                     ErrorID =   25;             //Duration > End Time.
 
-                SELECT;
-                    WHEN    ErrorLine   =   1;
-                            *In57       =   *On;
-                    
-                    WHEN    ErrorLine   =   2;
-                            *In64       =   *On;
-
-                    WHEN    ErrorLine   =   3;
-                            *In71       =   *On;
-
-                    WHEN    ErrorLine   =   4;
-                            *In78       =   *On;
-
-                    WHEN    ErrorLine   =   5;
-                            *In85       =   *On;
-                ENDSL;
+                    SELECT;
+                        WHEN    ErrorLine   =   1;
+                                *In57       =   *On;
+                        
+                        WHEN    ErrorLine   =   2;
+                                *In64       =   *On;
+    
+                        WHEN    ErrorLine   =   3;
+                                *In71       =   *On;
+    
+                        WHEN    ErrorLine   =   4;
+                                *In78       =   *On;
+    
+                        WHEN    ErrorLine   =   5;
+                                *In85       =   *On;
+                    ENDSL;
 
             WHEN    ErrorID =   17;             //Duration Minutes is invalid.
 
-                SELECT;
-                    WHEN    ErrorLine   =   1;
-                            *In58       =   *On;
-                    
-                    WHEN    ErrorLine   =   2;
-                            *In65       =   *On;
+                    SELECT;
+                        WHEN    ErrorLine   =   1;
+                                *In58       =   *On;
+                        
+                        WHEN    ErrorLine   =   2;
+                                *In65       =   *On;
+    
+                        WHEN    ErrorLine   =   3;
+                                *In72       =   *On;
+    
+                        WHEN    ErrorLine   =   4;
+                                *In79       =   *On;
+    
+                        WHEN    ErrorLine   =   5;
+                                *In86       =   *On;
+                    ENDSL;
 
-                    WHEN    ErrorLine   =   3;
-                            *In72       =   *On;
+            WHEN    ErrorID =   26;             //Entry Time is Overlapping.
 
-                    WHEN    ErrorLine   =   4;
-                            *In79       =   *On;
+                    SELECT;
+                        WHEN    UserProfileDS.PR0501    =   2   OR          //Start-End
+                                UserProfileDS.PR0501    =   3;              //Start-Duration
+    
+                                SELECT;
+                                    WHEN    ErrorLine   =   1;
+                                            *In53       =   *On;
+                                    
+                                    WHEN    ErrorLine   =   2;
+                                            *In60       =   *On;
+                
+                                    WHEN    ErrorLine   =   3;
+                                            *In67       =   *On;
+                
+                                    WHEN    ErrorLine   =   4;
+                                            *In74       =   *On;
+                
+                                    WHEN    ErrorLine   =   5;
+                                            *In81       =   *On;
+                                ENDSL;
+    
+                        WHEN    UserProfileDS.PR0501    =   4;              //End-Duration
+    
+                                SELECT;
+                                    WHEN    ErrorLine   =   1;
+                                            *In55       =   *On;
+                                    
+                                    WHEN    ErrorLine   =   2;
+                                            *In62       =   *On;
+                
+                                    WHEN    ErrorLine   =   3;
+                                            *In69       =   *On;
+                
+                                    WHEN    ErrorLine   =   4;
+                                            *In76       =   *On;
+                
+                                    WHEN    ErrorLine   =   5;
+                                            *In83       =   *On;
+                                ENDSL;
+    
+                    ENDSL;
 
-                    WHEN    ErrorLine   =   5;
-                            *In86       =   *On;
-                ENDSL;
-
-            WHEN    ErrorID =   27;             //Total Duration > 24 Hours.
-
-                SELECT;
-                    WHEN    UserProfileDS.PR0501    =   1;          //Duration
-                            *In57   =   *On;
-                    
-                    WHEN    UserProfileDS.PR0501    =   2;          //Start-End
-                            *In53   =   *On;
-
-                    WHEN    UserProfileDS.PR0501    =   3;          //Start-Duration
-                            *In53   =   *On;
-
-                    WHEN    UserProfileDS.PR0501    =   4;          //End-Duration
-                            *In55   =   *On;
-                ENDSL;
-
-            ENDSL;
+        ENDSL;
 
     ENDSR;
 // ===================================================================================================================================

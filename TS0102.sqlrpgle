@@ -407,7 +407,7 @@
                             WHEN    TSEntryArray(Index).ActID   <>  *Zeros  AND
                                     StartTime   =   EndTime;
                                     ValidScr01  =   'N';
-                                    ErrorID     =   36;         //Start Time = End Time.
+                                    ErrorID     =   34;         //Start Time = End Time.
                                     EXSR    GetErrorMsg;
                                     ErrorLine   =   Index;
                                     LEAVESR;
@@ -574,21 +574,11 @@
                             StartTime   =   %editc(TSEntryArray(Index).StartHH:'X') + %editc(TSEntryArray(Index).StartMM:'X') + '00';
 
                             IF  TmpArray(TmpIndex).EntryTime    =   StartTime;
-
-                                IF  UserProfileDS.PR0501    =   4;          //End-Duration
-                                    ValidScr01  =   'N';
-                                    ErrorID     =   26;                     //End Time or Duration is invalid.
-                                    EXSR    GetErrorMsg;
-                                    ErrorLine   =   Index;
-                                    LEAVESR;
-                                ELSE;
-                                    ValidScr01  =   'N';
-                                    ErrorID     =   20;                     //Start Time is invalid.
-                                    EXSR    GetErrorMsg;
-                                    ErrorLine   =   Index;
-                                    LEAVESR;
-                                ENDIF;
-
+                                ValidScr01  =   'N';
+                                ErrorID     =   26;         //Entry Time is Overlapping.
+                                EXSR    GetErrorMsg;
+                                ErrorLine   =   Index;
+                                LEAVESR;
                             ENDIF;
 
                         ENDDO;
@@ -602,21 +592,11 @@
                             StartTime   =   %editc(TSEntryArray(Index).StartHH:'X') + %editc(TSEntryArray(Index).StartMM:'X') + '00';
 
                             IF  TmpArray(TmpIndex - 1).EntryTime    =   StartTime;
-
-                                IF  UserProfileDS.PR0501    =   3;          //Start-Duration
-                                    ValidScr01  =   'N';
-                                    ErrorID     =   35;                     //Start Time or Duration is invalid.
-                                    EXSR    GetErrorMsg;
-                                    ErrorLine   =   Index;
-                                    LEAVESR;
-                                ELSE;
-                                    ValidScr01  =   'N';
-                                    ErrorID     =   34;                     //End Time is invalid.
-                                    EXSR    GetErrorMsg;
-                                    ErrorLine   =   Index;
-                                    LEAVESR;
-                                ENDIF;
-
+                                ValidScr01  =   'N';
+                                ErrorID     =   26;         //Entry Time is Overlapping.
+                                EXSR    GetErrorMsg;
+                                ErrorLine   =   Index;
+                                LEAVESR;
                             ENDIF;
 
                         ENDDO;
