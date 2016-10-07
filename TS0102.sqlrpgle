@@ -80,6 +80,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     DCL-S   ActivityExists  CHAR(1);
     DCL-S   ExitProgram     CHAR(1);
+    DCL-S   FutureDate      CHAR(1);
     DCL-S   F3Pressed       CHAR(1);
     DCL-S   F12Pressed      CHAR(1);
     DCL-S   IsValid         CHAR(1);
@@ -221,6 +222,16 @@
                 ValidScr01  =   'N';
                 ErrorID     =   18;         //Date is invalid.
                 EXSR    GetErrorMsg;
+            ELSE;
+
+                CALLP   COMN_CheckFutureDate(%editc(EntryDate:'X'):UserProfileDS.PR1001:FutureDate);
+
+                IF  FutureDate  =   'Y';
+                    ValidScr01  =   'N';
+                    ErrorID     =   35;         //Future Date is not allowed.
+                    EXSR    GetErrorMsg;
+                ENDIF;
+            
             ENDIF;
         
         ENDIF;

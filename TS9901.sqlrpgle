@@ -181,43 +181,11 @@
                     Month       =   %dec(%subst(Date:5:2):2:0);
                     Day         =   %dec(%subst(Date:7:2):2:0);
         ENDSL;
-
-        CALLP   COMN_ValidateYear(Year:IsValid);
         
-        IF      IsValid = 'Y';
-        CALLP   COMN_ValidateMonth(Month:Year:IsValid);
-        ENDIF;
+        CALLP   COMN_ValidateMonth(Month:IsValid);
         
         IF      IsValid = 'Y';
         CALLP   COMN_ValidateDay(Day:Month:Year:IsValid);
-        ENDIF;
-        
-        RETURN;
-
-    END-PROC;
-// ===================================================================================================================================
-// COMN_ValidateYear(): Validate Year
-// -----------------------------------------------------------------------------------------------------------------------------------
-    DCL-PROC        COMN_ValidateYear EXPORT;
-
-        DCL-PI      COMN_ValidateYear;
-        DCL-PARM    Year    ZONED(4:0)  CONST;
-        DCL-PARM    IsValid CHAR(1);
-        END-PI;
-                
-        DCL-S   TmpDate CHAR(8);
-        DCL-S   TmpYear ZONED(4:0);
-
-        //Initialize Variables
-        IsValid =   *Blanks;
-        
-        TmpDate =   %char(%dec(%date));
-        TmpYear =   %dec(%subst(TmpDate:1:4):4:0);
-        
-        IF  Year    >   TmpYear;
-            IsValid =   'N';
-        ELSE;
-            IsValid =   'Y';
         ENDIF;
         
         RETURN;
@@ -230,32 +198,17 @@
 
         DCL-PI      COMN_ValidateMonth;
         DCL-PARM    Month   ZONED(2:0)  CONST;
-        DCL-PARM    Year    ZONED(4:0)  CONST;
         DCL-PARM    IsValid CHAR(1);
         END-PI;
         
-        DCL-S   TmpDate     CHAR(8);
-        DCL-S   TmpMonth    ZONED(2:0);
-        DCL-S   TmpYear     ZONED(4:0);
-
         //Initialize Variables
         IsValid =   *Blanks;
         
-        TmpDate     =   %char(%dec(%date));
-        TmpMonth    =   %dec(%subst(TmpDate:5:2):2:0);
-        TmpYear     =   %dec(%subst(TmpDate:1:4):4:0);
-
-        SELECT;
-            WHEN    Month   >   TmpMonth    AND
-                    Year    =   TmpYear;
-                    IsValid =   'N';
-
-            WHEN    Month   >   12;
-                    IsValid =   'N';
-
-            OTHER;
-                    IsValid =   'Y';            
-        ENDSL;
+        IF  Month   >   12;
+            IsValid =   'N';
+        ELSE;
+            IsValid =   'Y';
+        ENDIF;
         
         RETURN;
 
@@ -272,28 +225,14 @@
         DCL-PARM    IsValid CHAR(1);
         END-PI;
         
-        DCL-S   TmpDate     CHAR(8);
-        DCL-S   TmpDay      ZONED(2:0);
-        DCL-S   TmpMonth    ZONED(2:0);
-        DCL-S   TmpYear     ZONED(4:0);
         DCL-S   LeapYear    CHAR(1);
 
         //Initialize Variables
         IsValid =   *Blanks;
         
-        TmpDate     =   %char(%dec(%date));
-        TmpDay      =   %dec(%subst(TmpDate:7:2):2:0);
-        TmpMonth    =   %dec(%subst(TmpDate:5:2):2:0);
-        TmpYear     =   %dec(%subst(TmpDate:1:4):4:0);
-        
         CALLP   COMN_CheckLeapYear(Year:LeapYear);
         
         SELECT;
-            WHEN    Day         >   TmpDay      AND
-                    Month       =   TmpMonth    AND
-                    Year        =   TmpYear;
-                    IsValid     =   'N';
-        
             WHEN    Day         >   31;
                     IsValid     =   'N';
         
@@ -346,6 +285,70 @@
 
             OTHER;
                     LeapYear        =   'N';
+        ENDSL;
+
+        RETURN;
+
+    END-PROC;
+// ===================================================================================================================================
+// COMN_CheckFutureDate(): Check Future Date
+// -----------------------------------------------------------------------------------------------------------------------------------
+    DCL-PROC        COMN_CheckFutureDate EXPORT;
+
+        DCL-PI      COMN_CheckFutureDate;
+        DCL-PARM    Date        CHAR(8)     CONST;
+        DCL-PARM    DateFormat  CHAR(3)     CONST;
+        DCL-PARM    FutureDate  CHAR(1);
+        END-PI;
+        
+        DCL-S   Day         ZONED(2:0);
+        DCL-S   Month       ZONED(2:0);
+        DCL-S   Year        ZONED(4:0);
+        DCL-S   TmpDate     CHAR(8);
+        DCL-S   TmpDay      ZONED(2:0);
+        DCL-S   TmpMonth    ZONED(2:0);
+        DCL-S   TmpYear     ZONED(4:0);
+
+        //Initialize Variables
+        FutureDate  =   *Blanks;
+
+        SELECT;
+            WHEN    DateFormat  =   'DMY';
+                    Day         =   %dec(%subst(Date:1:2):2:0);
+                    Month       =   %dec(%subst(Date:3:2):2:0);
+                    Year        =   %dec(%subst(Date:5:4):4:0);
+
+            WHEN    DateFormat  =   'MDY';
+                    Month       =   %dec(%subst(Date:1:2):2:0);
+                    Day         =   %dec(%subst(Date:3:2):2:0);
+                    Year        =   %dec(%subst(Date:5:4):4:0);
+
+            WHEN    DateFormat  =   'YMD';
+                    Year        =   %dec(%subst(Date:1:4):4:0);
+                    Month       =   %dec(%subst(Date:5:2):2:0);
+                    Day         =   %dec(%subst(Date:7:2):2:0);
+        ENDSL;
+        
+        TmpDate     =   %char(%dec(%date));
+        TmpDay      =   %dec(%subst(TmpDate:7:2):2:0);
+        TmpMonth    =   %dec(%subst(TmpDate:5:2):2:0);
+        TmpYear     =   %dec(%subst(TmpDate:1:4):4:0);
+
+        SELECT;
+            WHEN    Year        >   TmpYear;
+                    FutureDate  =   'Y';
+
+            WHEN    Month       >   TmpMonth    AND
+                    Year        =   TmpYear;
+                    FutureDate  =   'Y';
+
+            WHEN    Day         >   TmpDay      AND
+                    Month       =   TmpMonth    AND
+                    Year        =   TmpYear;
+                    FutureDate  =   'Y';
+
+            OTHER;
+                    FutureDate  =   'N';
         ENDSL;
 
         RETURN;
