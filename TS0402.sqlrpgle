@@ -426,7 +426,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   CallView;
 
-        TS0403(PosID:PosDesc:Count:pActivitiesArray:TmpDSLRD:BlankScreen:F3Pressed:F5Pressed:F6Pressed:F13Pressed:Message:ErrorID);
+        CALLP   TS0403(PosID:PosDesc:Count:pActivitiesArray:TmpDSLRD:BlankScreen:F3Pressed:F5Pressed:F6Pressed:F13Pressed:Message:ErrorID);
 
     ENDSR;
 // ===================================================================================================================================
@@ -434,7 +434,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   CallMaintain;
 
-        TS0404(Mode:pActivityDS);
+        CALLP   TS0404(Mode:pActivityDS);
 
     ENDSR;
 // ===================================================================================================================================

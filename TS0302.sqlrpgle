@@ -247,7 +247,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   ProcSubset;
 
-        TS0304(pFromSUM:pToSUM);
+        CALLP   TS0304(pFromSUM:pToSUM);
         
         EXSR    BuildArray;
 
@@ -274,7 +274,7 @@
                 FromDTL.ActID       =   TSSummaryArray(TmpCount).ActID;
                 ToDTL.ActID         =   TSSummaryArray(TmpCount).ActID;
 
-                TS0202(FromDTL:ToDTL:HideSubset);
+                CALLP   TS0202(FromDTL:ToDTL:HideSubset);
 
                 TSSummaryArray(TmpCount).Opt    =   *Zeros;
 
@@ -353,7 +353,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   CallView;
 
-        TS0303(Count:pTSSummaryArray:TmpDSLRD:F3Pressed:F5Pressed:F13Pressed:F17Pressed);
+        CALLP   TS0303(Count:pTSSummaryArray:TmpDSLRD:F3Pressed:F5Pressed:F13Pressed:F17Pressed);
 
     ENDSR;
 // ===================================================================================================================================

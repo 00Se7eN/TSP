@@ -680,7 +680,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   CallView;
 
-        TS0103(EntryDate:pUserProfileDS:pTSEntryArray:ProtectFields:F3Pressed:F12Pressed:Message:ErrorID:ErrorLine);
+        CALLP   TS0103(EntryDate:pUserProfileDS:pTSEntryArray:ProtectFields:F3Pressed:F12Pressed:Message:ErrorID:ErrorLine);
 
     ENDSR;
 // ===================================================================================================================================
