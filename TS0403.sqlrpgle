@@ -61,6 +61,7 @@
     DCL-PARM    Count               ZONED(5:0);
     DCL-PARM    pActivitiesArray    POINTER;
     DCL-PARM    TmpDSLRD            ZONED(4:0);
+    DCL-PARM    BlankScreen         CHAR(1);
     DCL-PARM    F3Pressed           CHAR(1);
     DCL-PARM    F5Pressed           CHAR(1);
     DCL-PARM    F6Pressed           CHAR(1);
@@ -77,6 +78,7 @@
     DCL-PARM    Count               ZONED(5:0);
     DCL-PARM    pActivitiesArray    POINTER;
     DCL-PARM    TmpDSLRD            ZONED(4:0);
+    DCL-PARM    BlankScreen         CHAR(1);
     DCL-PARM    F3Pressed           CHAR(1);
     DCL-PARM    F5Pressed           CHAR(1);
     DCL-PARM    F6Pressed           CHAR(1);
@@ -147,6 +149,12 @@
             WRITE   TS04031;
 
         ENDDO;
+
+        IF  BlankScreen =   'Y';
+            *In32       =   *On;
+            BlankScreen =   'N';
+            LEAVESR;
+        ENDIF;
 
         IF  TmpDSLRD    =   *Zeros  AND
             Count       <>  *Zeros;

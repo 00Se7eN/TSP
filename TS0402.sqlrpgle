@@ -62,6 +62,7 @@
 // ===================================================================================================================================
 // Switches
 // -----------------------------------------------------------------------------------------------------------------------------------
+    DCL-S   BlankScreen     CHAR(1);
     DCL-S   ExitProgram     CHAR(1);
     DCL-S   F3Pressed       CHAR(1);
     DCL-S   F5Pressed       CHAR(1);
@@ -86,6 +87,7 @@
     DCL-PARM    Count               ZONED(5:0);
     DCL-PARM    pActivitiesArray    POINTER;
     DCL-PARM    TmpDSLRD            ZONED(4:0);
+    DCL-PARM    BlankScreen         CHAR(1);
     DCL-PARM    F3Pressed           CHAR(1);
     DCL-PARM    F5Pressed           CHAR(1);
     DCL-PARM    F6Pressed           CHAR(1);
@@ -202,8 +204,10 @@
 
         ENDDO;
 
-        ErrorID =   9;          //Activity ID is invalid.
-        EXSR    GetErrorMsg;
+        BlankScreen = 'Y';
+        Message     =   *Blanks;
+        PosID       =   *Zeros;
+        PosDesc     =   *Blanks;
 
     ENDSR;
 // ===================================================================================================================================
@@ -233,8 +237,9 @@
 
         ENDDO;
 
-        ErrorID =   10;          //Activity Description is invalid.
-        EXSR    GetErrorMsg;
+        BlankScreen = 'Y';
+        Message     =   *Blanks;
+        PosDesc     =   *Blanks;
 
     ENDSR;
 // ===================================================================================================================================
@@ -421,7 +426,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     BEGSR   CallView;
 
-        TS0403(PosID:PosDesc:Count:pActivitiesArray:TmpDSLRD:F3Pressed:F5Pressed:F6Pressed:F13Pressed:Message:ErrorID);
+        TS0403(PosID:PosDesc:Count:pActivitiesArray:TmpDSLRD:BlankScreen:F3Pressed:F5Pressed:F6Pressed:F13Pressed:Message:ErrorID);
 
     ENDSR;
 // ===================================================================================================================================
