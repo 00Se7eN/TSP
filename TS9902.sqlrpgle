@@ -50,7 +50,7 @@
 
         DCL-DS  UserProfileDS   EXTNAME('TSPPARA') BASED(pUserProfileDS) QUALIFIED;
         END-DS;
-        
+
         // Initialize Variables
         CLEAR   UserProfileDS;
         UserExists  =   *Blanks;
@@ -75,7 +75,7 @@
                     Input       =   UserID;
                     CALLP   COMN_LogError(#User:ErrorDate:ErrorTime:SQLCODE:ProcName:Input:#JobName:#JobNo);
         ENDSL;
-            
+
         RETURN;
 
     END-PROC;
@@ -167,7 +167,7 @@
 
         DCL-DS  UserProfileDS   EXTNAME('TSPPARA') BASED(pUserProfileDS) QUALIFIED;
         END-DS;
-        
+
         UserProfileDS.PR3001    =   'PRKEY1 = User ID';
         UserProfileDS.PR3002    =   'PR1001 = Date Entry Format';
         UserProfileDS.PR3003    =   'PR1002 = Date Display Format';
@@ -188,7 +188,7 @@
             Input       =   *Blanks;
             CALLP   COMN_LogError(#User:ErrorDate:ErrorTime:SQLCODE:ProcName:Input:#JobName:#JobNo);
         ENDIF;
-            
+
         RETURN;
 
     END-PROC;
@@ -203,7 +203,7 @@
 
         DCL-DS  UserProfileDS   EXTNAME('TSPPARA') BASED(pUserProfileDS) QUALIFIED;
         END-DS;
-        
+
         EXEC SQL
         UPDATE  TSPPARA
                 SET     ROW     =   :UserProfileDS
@@ -216,7 +216,7 @@
             Input       =   *Blanks;
             CALLP   COMN_LogError(#User:ErrorDate:ErrorTime:SQLCODE:ProcName:Input:#JobName:#JobNo);
         ENDIF;
-            
+
         RETURN;
 
     END-PROC;
@@ -274,9 +274,9 @@
         END-DS;
 
         //Initialize Variables
-        Count   =   *Zeros; 
+        Count   =   *Zeros;
         CLEAR   ActivitiesArray;
-        
+
         EXEC SQL
         DECLARE C1  CURSOR  FOR
                     SELECT  *   FROM    USRACTS
@@ -285,11 +285,11 @@
 
         EXEC SQL
         OPEN C1;
-        
+
         EXEC SQL
-        FETCH   FROM    C1 
+        FETCH   FROM    C1
                 INTO    :TmpUserID, :TmpActivityID, :TmpActivity;
-        
+
         DOW SQLCODE <>  100;
             Count   =   Count + 1;
 
@@ -297,16 +297,16 @@
             ActivitiesArray(Count).User         =   TmpUserID;
             ActivitiesArray(Count).ActivityID   =   TmpActivityID;
             ActivitiesArray(Count).Activity     =   TmpActivity;
-        
+
             EXEC SQL
-            FETCH   FROM    C1 
+            FETCH   FROM    C1
                     INTO    :TmpUserID, :TmpActivityID, :TmpActivity;
-        
+
         ENDDO;
-        
+
         EXEC SQL
         CLOSE C1;
-                    
+
         RETURN;
 
     END-PROC;
@@ -322,7 +322,7 @@
 
         //Initialize Variables
         ActivityID   =  *Zeros;
-        
+
         EXEC SQL
         SELECT  PR0502  INTO    :ActivityID
                         FROM    TSPPARA
@@ -342,7 +342,7 @@
             Input       =   UserID;
             CALLP   COMN_LogError(#User:ErrorDate:ErrorTime:SQLCODE:ProcName:Input:#JobName:#JobNo);
         ENDIF;
-                                    
+
         RETURN;
 
     END-PROC;
@@ -375,7 +375,7 @@
             Input       =   *Blanks;
             CALLP   COMN_LogError(#User:ErrorDate:ErrorTime:SQLCODE:ProcName:Input:#JobName:#JobNo);
         ENDIF;
-                                    
+
         RETURN;
 
     END-PROC;
@@ -408,7 +408,7 @@
             Input       =   *Blanks;
             CALLP   COMN_LogError(#User:ErrorDate:ErrorTime:SQLCODE:ProcName:Input:#JobName:#JobNo);
         ENDIF;
-                                    
+
         RETURN;
 
     END-PROC;
@@ -440,7 +440,7 @@
             Input       =   *Blanks;
             CALLP   COMN_LogError(#User:ErrorDate:ErrorTime:SQLCODE:ProcName:Input:#JobName:#JobNo);
         ENDIF;
-                                    
+
         RETURN;
 
     END-PROC;
@@ -492,7 +492,7 @@
         ENDIF;
 
         CALLP   TIME_ValidateMinutes(StartMM:IsValid);
-        
+
         IF  IsValid =   'N';
             ErrorID =   13;         //Start Minutes is invalid.
             RETURN;
@@ -526,7 +526,7 @@
         ENDIF;
 
         CALLP   TIME_ValidateMinutes(EndMM:IsValid);
-        
+
         IF  IsValid =   'N';
             ErrorID =   15;         //End Minutes is invalid.
             RETURN;
@@ -561,7 +561,7 @@
         ENDIF;
 
         CALLP   TIME_ValidateMinutes(DurationMM:IsValid);
-        
+
         IF  IsValid =   'N';
             ErrorID =   17;         //Duration Minutes is invalid.
             RETURN;
@@ -610,7 +610,7 @@
         IF  Minutes >   59;
             IsValid =   'N';
         ELSE;
-            IsValid =   'Y';            
+            IsValid =   'Y';
         ENDIF;
 
         RETURN;
@@ -813,7 +813,7 @@
             Index   =   *Zeros;
         DOW Index   <   5;
             Index   =   Index + 1;
-                
+
             IF  TSEntryArray(Index).ActID   <>  *Zeros;
 
                 TSDetailDS.User             =   UserID;
@@ -837,7 +837,7 @@
                     Input       =   UserID + ' ' + %editc(EntryDate:'X');
                     CALLP   COMN_LogError(#User:ErrorDate:ErrorTime:SQLCODE:ProcName:Input:#JobName:#JobNo);
                 ENDIF;
-            
+
                 CLEAR   TSDetailDS;
 
             ENDIF;
@@ -881,7 +881,7 @@
             Index   =   *Zeros;
         DOW Index   <   5;
             Index   =   Index + 1;
-                
+
             IF  TSEntryArray(Index).ActID   <>  *Zeros;
 
                 TmpActID    =   TSEntryArray(Index).ActID;
@@ -951,7 +951,7 @@
                         CALLP   COMN_LogError(#User:ErrorDate:ErrorTime:SQLCODE:ProcName:Input:#JobName:#JobNo);
                     ENDIF;
                 ENDIF;
-            
+
                 CLEAR   TSSummaryDS;
                 EntryExists =   *Blanks;
 
@@ -1032,7 +1032,7 @@
         DCL-S   ToDuration      ZONED(4:0);
 
         //Initialize Variables
-        Count   =   *Zeros; 
+        Count   =   *Zeros;
         CLEAR   TSDetailsArray;
 
         CALLP   TIME_GetUserProfile(UserID:pUserProfileDS:UserExists);
@@ -1132,7 +1132,7 @@
             TSDetailsArray(Count).DurationHH    =   F1DRTNHH;
             TSDetailsArray(Count).DurationMM    =   F1DRTNMM;
             TSDetailsArray(Count).ActID         =   F1ACTID;
-            
+
             EXEC SQL
             SELECT  ACTIVITY    INTO    :TmpActivity
                                 FROM    USRACTS
@@ -1140,9 +1140,9 @@
                                         ACTID   =   :F1ACTID;
 
             TSDetailsArray(Count).Activity      =   TmpActivity;
-                    
+
             READP   F1FMT;
-        
+
         ENDDO;
 
         CLOSE   TSDTL;
@@ -1203,7 +1203,7 @@
         DCL-S   ToDuration      ZONED(4:0);
 
         //Initialize Variables
-        Count   =   *Zeros; 
+        Count   =   *Zeros;
         CLEAR   TSSummaryArray;
 
         CALLP   TIME_GetUserProfile(UserID:pUserProfileDS:UserExists);
@@ -1285,7 +1285,7 @@
             TSSummaryArray(Count).DurationHH    =   F2DRTNHH;
             TSSummaryArray(Count).DurationMM    =   F2DRTNMM;
             TSSummaryArray(Count).ActID         =   F2ACTID;
-            
+
             EXEC SQL
             SELECT  ACTIVITY    INTO    :TmpActivity
                                 FROM    USRACTS
@@ -1293,11 +1293,11 @@
                                         ACTID   =   :F2ACTID;
 
             TSSummaryArray(Count).Activity      =   TmpActivity;
-                    
+
             READP   F2FMT;
-        
+
         ENDDO;
-        
+
         CLOSE   TSSUM;
 
         RETURN;
@@ -1326,8 +1326,8 @@
         DCL-S   UserExists      CHAR(1);
 
         //Initialize Variables
-        TotalDurationHH =   *Zeros; 
-        TotalDurationMM =   *Zeros; 
+        TotalDurationHH =   *Zeros;
+        TotalDurationMM =   *Zeros;
 
         CALLP   TIME_GetUserProfile(UserID:pUserProfileDS:UserExists);
 
@@ -1352,7 +1352,7 @@
 
         EXEC SQL
         OPEN C2;
-        
+
         EXEC SQL
         FETCH   FROM    C2
                 INTO    :TSSummaryDS;
@@ -1363,13 +1363,13 @@
             TotalDurationMM =   TotalDurationMM + TSSummaryDS.DrtnMM;
 
             CLEAR   TSSummaryDS;
-        
+
             EXEC SQL
             FETCH   FROM    C2
                     INTO    :TSSummaryDS;
-        
+
         ENDDO;
-        
+
         EXEC SQL
         CLOSE C2;
 
@@ -1434,7 +1434,7 @@
 
         EXEC SQL
         OPEN C3;
-        
+
         EXEC SQL
         FETCH   FROM    C3
                 INTO    :TSDetailDS;
@@ -1456,13 +1456,13 @@
             TmpArray(Count + 1).Status       =   'DE';
 
             CLEAR   TSDetailDS;
-        
+
             EXEC SQL
             FETCH   FROM    C3
                     INTO    :TSDetailDS;
-        
+
         ENDDO;
-        
+
         EXEC SQL
         CLOSE C3;
 

@@ -56,7 +56,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     /COPY /QOpenSys/QIBM/UserData/OPS/Orion/serverworkspace/vi/vinayakmahajan/OrionContent/TSP/TS9902PR.sqlrpgle
 // ===================================================================================================================================
-// Parameters for Various Programs 
+// Parameters for Various Programs
 // -----------------------------------------------------------------------------------------------------------------------------------
 
 // Parameters for TS0405 - Maintain Activity (View)
@@ -157,7 +157,7 @@
         ENDIF;
 
         EXSR    ProcRequest;
-        
+
     ENDSR;
 // ===================================================================================================================================
 // Process Request
@@ -219,7 +219,7 @@
             F3Pressed   =   'N';
             LEAVESR;
         ENDIF;
-        
+
         CALLP   TIME_DeleteActivity(pActivityDS);
 
         ExitProgram =   'Y';
@@ -235,7 +235,7 @@
         IF  F3Pressed   =   'Y';
             F3Pressed   =   'N';
         ENDIF;
-        
+
         ExitProgram =   'Y';
 
     ENDSR;

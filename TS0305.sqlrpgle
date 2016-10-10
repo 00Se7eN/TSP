@@ -57,7 +57,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     /COPY /QOpenSys/QIBM/UserData/OPS/Orion/serverworkspace/vi/vinayakmahajan/OrionContent/TSP/TS9902PR.sqlrpgle
 // ===================================================================================================================================
-// Parameters for Various Programs 
+// Parameters for Various Programs
 // -----------------------------------------------------------------------------------------------------------------------------------
 
 // Parameters for this Program
@@ -128,7 +128,7 @@
         TODRTNM     =   ToSUM.DrtnMM;
 
         MESSAGE     =   Message;
-        
+
     ENDSR;
 // ===================================================================================================================================
 // Set Screen 01 Field Cursor
@@ -180,7 +180,7 @@
             FromSUM.ActID       =   FROMACTID;
             FromSUM.DrtnHH      =   FROMDRTNH;
             FromSUM.DrtnMM      =   FROMDRTNM;
-        
+
             ToSUM.EntryDate     =   TODATE;
             ToSUM.ActID         =   TOACTID;
             ToSUM.DrtnHH        =   TODRTNH;

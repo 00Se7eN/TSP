@@ -48,7 +48,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     /COPY /QOpenSys/QIBM/UserData/OPS/Orion/serverworkspace/vi/vinayakmahajan/OrionContent/TSP/TS9902PR.sqlrpgle
 // ===================================================================================================================================
-// Parameters for Various Programs 
+// Parameters for Various Programs
 // -----------------------------------------------------------------------------------------------------------------------------------
 
 // Parameters for this Program
@@ -111,14 +111,14 @@
         SELECT;
             WHEN    Mode    =   'Add';
                     *In91   =   *On;
-                    
+
             WHEN    Mode    =   'Delete';
                     *In31   =   *On;
-                    
+
             WHEN    Mode    =   'Display';
                     *In31   =   *On;
         ENDSL;
-                    
+
         MODE    =   Mode;
         ACTID   =   ActivityDS.ActivityID;
         ACTDESC =   ActivityDS.Activity;

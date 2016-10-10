@@ -52,7 +52,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     /COPY /QOpenSys/QIBM/UserData/OPS/Orion/serverworkspace/vi/vinayakmahajan/OrionContent/TSP/TS9902PR.sqlrpgle
 // ===================================================================================================================================
-// Parameters for Various Programs 
+// Parameters for Various Programs
 // -----------------------------------------------------------------------------------------------------------------------------------
 
 // Parameters for this Program
@@ -115,7 +115,7 @@
         MESSAGE =   Message;
 
         EXSR    BuildSFL;
-        
+
     ENDSR;
 // ===================================================================================================================================
 // Build the Subfile
@@ -144,11 +144,11 @@
             Count       <>  *Zeros;
             TmpDSLRD    =   1;
         ENDIF;
-        
+
         IF  TmpDSLRD    >   Count;
             TmpDSLRD    =   1;
         ENDIF;
-        
+
         IF  RRN1        =   *Zeros;
             *In32       =   *On;
         ELSE;

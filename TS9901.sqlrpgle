@@ -139,7 +139,7 @@
         DCL-PARM    JobName     CHAR(10);
         DCL-PARM    JobNo       CHAR(10);
         END-PI;
-        
+
         EXEC SQL
         INSERT  INTO    ERRLOG
                 VALUES( :User,      :ErrorDate,
@@ -160,7 +160,7 @@
         DCL-PARM    DateFormat  CHAR(3)     CONST;
         DCL-PARM    IsValid     CHAR(1);
         END-PI;
-        
+
         DCL-S   Day     ZONED(2:0);
         DCL-S   Month   ZONED(2:0);
         DCL-S   Year    ZONED(4:0);
@@ -181,13 +181,13 @@
                     Month       =   %dec(%subst(Date:5:2):2:0);
                     Day         =   %dec(%subst(Date:7:2):2:0);
         ENDSL;
-        
+
         CALLP   COMN_ValidateMonth(Month:IsValid);
-        
+
         IF      IsValid = 'Y';
         CALLP   COMN_ValidateDay(Day:Month:Year:IsValid);
         ENDIF;
-        
+
         RETURN;
 
     END-PROC;
@@ -200,16 +200,16 @@
         DCL-PARM    Month   ZONED(2:0)  CONST;
         DCL-PARM    IsValid CHAR(1);
         END-PI;
-        
+
         //Initialize Variables
         IsValid =   *Blanks;
-        
+
         IF  Month   >   12;
             IsValid =   'N';
         ELSE;
             IsValid =   'Y';
         ENDIF;
-        
+
         RETURN;
 
     END-PROC;
@@ -224,23 +224,23 @@
         DCL-PARM    Year    ZONED(4:0)  CONST;
         DCL-PARM    IsValid CHAR(1);
         END-PI;
-        
+
         DCL-S   LeapYear    CHAR(1);
 
         //Initialize Variables
         IsValid =   *Blanks;
-        
+
         CALLP   COMN_CheckLeapYear(Year:LeapYear);
-        
+
         SELECT;
             WHEN    Day         >   31;
                     IsValid     =   'N';
-        
+
             WHEN    LeapYear    =   'Y'         AND
                     Month       =   2           AND
                     Day         >   29;
                     IsValid     =   'N';
-        
+
             WHEN    LeapYear    =   'N'         AND
                     Month       =   2           AND
                     Day         >   28;
@@ -258,7 +258,7 @@
             OTHER;
                     IsValid     =   'Y';
         ENDSL;
-            
+
         RETURN;
 
     END-PROC;
@@ -274,7 +274,7 @@
 
         //Initialize Variables
         LeapYear    =   *Blanks;
-        
+
         SELECT;
             WHEN    %rem(Year:400)  =   *Zeros;
                     LeapYear        =   'Y';
@@ -300,7 +300,7 @@
         DCL-PARM    DateFormat  CHAR(3)     CONST;
         DCL-PARM    FutureDate  CHAR(1);
         END-PI;
-        
+
         DCL-S   Day         ZONED(2:0);
         DCL-S   Month       ZONED(2:0);
         DCL-S   Year        ZONED(4:0);
@@ -328,7 +328,7 @@
                     Month       =   %dec(%subst(Date:5:2):2:0);
                     Day         =   %dec(%subst(Date:7:2):2:0);
         ENDSL;
-        
+
         TmpDate     =   %char(%dec(%date));
         TmpDay      =   %dec(%subst(TmpDate:7:2):2:0);
         TmpMonth    =   %dec(%subst(TmpDate:5:2):2:0);

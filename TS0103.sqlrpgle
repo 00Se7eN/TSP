@@ -54,7 +54,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     /COPY /QOpenSys/QIBM/UserData/OPS/Orion/serverworkspace/vi/vinayakmahajan/OrionContent/TSP/TS9902PR.sqlrpgle
 // ===================================================================================================================================
-// Parameters for Various Programs 
+// Parameters for Various Programs
 // -----------------------------------------------------------------------------------------------------------------------------------
 
 // Parameters for this Program
@@ -170,15 +170,15 @@
                     *In91   =   *On;
                     *In32   =   *On;
                     *In92   =   *On;
-                    
+
             WHEN    UserProfileDS.PR0501    =    2;         //Start-End
                     *In33   =   *On;
                     *In93   =   *On;
-                    
+
             WHEN    UserProfileDS.PR0501    =    3;         //Start-Duration
                     *In32   =   *On;
                     *In92   =   *On;
-                    
+
             WHEN    UserProfileDS.PR0501    =    4;         //End-Duration
                     *In31   =   *On;
                     *In91   =   *On;
@@ -198,7 +198,7 @@
         IF  ProtectFields   =   'Y';
             *In34   =   *On;
         ENDIF;
-                    
+
         ACTID1      =   TSEntryArray(1).ActID;
         STARTHH1    =   TSEntryArray(1).StartHH;
         STARTMM1    =   TSEntryArray(1).StartMM;
@@ -257,23 +257,23 @@
             WHEN    ErrorID =   18  OR          //Date is invalid.
                     ErrorID =   28;             //Date is blank.
                     *In51   =   *On;
-            
+
             WHEN    ErrorID =   9   OR          //Activity ID is invalid.
                     ErrorID =   19;             //Activity ID is blank.
 
                     SELECT;
                         WHEN    ErrorLine   =   1;
                                 *In52       =   *On;
-                        
+
                         WHEN    ErrorLine   =   2;
                                 *In59       =   *On;
-    
+
                         WHEN    ErrorLine   =   3;
                                 *In66       =   *On;
-    
+
                         WHEN    ErrorLine   =   4;
                                 *In73       =   *On;
-    
+
                         WHEN    ErrorLine   =   5;
                                 *In80       =   *On;
                     ENDSL;
@@ -286,16 +286,16 @@
                     SELECT;
                         WHEN    ErrorLine   =   1;
                                 *In53       =   *On;
-                        
+
                         WHEN    ErrorLine   =   2;
                                 *In60       =   *On;
-    
+
                         WHEN    ErrorLine   =   3;
                                 *In67       =   *On;
-    
+
                         WHEN    ErrorLine   =   4;
                                 *In74       =   *On;
-    
+
                         WHEN    ErrorLine   =   5;
                                 *In81       =   *On;
                     ENDSL;
@@ -305,16 +305,16 @@
                     SELECT;
                         WHEN    ErrorLine   =   1;
                                 *In54       =   *On;
-                        
+
                         WHEN    ErrorLine   =   2;
                                 *In61       =   *On;
-    
+
                         WHEN    ErrorLine   =   3;
                                 *In68       =   *On;
-    
+
                         WHEN    ErrorLine   =   4;
                                *In75        =   *On;
-    
+
                         WHEN    ErrorLine   =   5;
                                 *In82       =   *On;
                     ENDSL;
@@ -325,16 +325,16 @@
                     SELECT;
                         WHEN    ErrorLine   =   1;
                                 *In55       =   *On;
-                        
+
                         WHEN    ErrorLine   =   2;
                                 *In62       =   *On;
-    
+
                         WHEN    ErrorLine   =   3;
                                 *In69       =   *On;
-    
+
                         WHEN    ErrorLine   =   4;
                                 *In76       =   *On;
-    
+
                         WHEN    ErrorLine   =   5;
                                 *In83       =   *On;
                     ENDSL;
@@ -344,16 +344,16 @@
                     SELECT;
                         WHEN    ErrorLine   =   1;
                                 *In56       =   *On;
-                        
+
                         WHEN    ErrorLine   =   2;
                                 *In63       =   *On;
-    
+
                         WHEN    ErrorLine   =   3;
                                 *In70       =   *On;
-    
+
                         WHEN    ErrorLine   =   4;
                                 *In77       =   *On;
-    
+
                         WHEN    ErrorLine   =   5;
                                 *In84       =   *On;
                     ENDSL;
@@ -366,16 +366,16 @@
                     SELECT;
                         WHEN    ErrorLine   =   1;
                                 *In57       =   *On;
-                        
+
                         WHEN    ErrorLine   =   2;
                                 *In64       =   *On;
-    
+
                         WHEN    ErrorLine   =   3;
                                 *In71       =   *On;
-    
+
                         WHEN    ErrorLine   =   4;
                                 *In78       =   *On;
-    
+
                         WHEN    ErrorLine   =   5;
                                 *In85       =   *On;
                     ENDSL;
@@ -385,16 +385,16 @@
                     SELECT;
                         WHEN    ErrorLine   =   1;
                                 *In58       =   *On;
-                        
+
                         WHEN    ErrorLine   =   2;
                                 *In65       =   *On;
-    
+
                         WHEN    ErrorLine   =   3;
                                 *In72       =   *On;
-    
+
                         WHEN    ErrorLine   =   4;
                                 *In79       =   *On;
-    
+
                         WHEN    ErrorLine   =   5;
                                 *In86       =   *On;
                     ENDSL;
@@ -404,43 +404,43 @@
                     SELECT;
                         WHEN    UserProfileDS.PR0501    =   2   OR          //Start-End
                                 UserProfileDS.PR0501    =   3;              //Start-Duration
-    
+
                                 SELECT;
                                     WHEN    ErrorLine   =   1;
                                             *In53       =   *On;
-                                    
+
                                     WHEN    ErrorLine   =   2;
                                             *In60       =   *On;
-                
+
                                     WHEN    ErrorLine   =   3;
                                             *In67       =   *On;
-                
+
                                     WHEN    ErrorLine   =   4;
                                             *In74       =   *On;
-                
+
                                     WHEN    ErrorLine   =   5;
                                             *In81       =   *On;
                                 ENDSL;
-    
+
                         WHEN    UserProfileDS.PR0501    =   4;              //End-Duration
-    
+
                                 SELECT;
                                     WHEN    ErrorLine   =   1;
                                             *In55       =   *On;
-                                    
+
                                     WHEN    ErrorLine   =   2;
                                             *In62       =   *On;
-                
+
                                     WHEN    ErrorLine   =   3;
                                             *In69       =   *On;
-                
+
                                     WHEN    ErrorLine   =   4;
                                             *In76       =   *On;
-                
+
                                     WHEN    ErrorLine   =   5;
                                             *In83       =   *On;
                                 ENDSL;
-    
+
                     ENDSL;
 
         ENDSL;

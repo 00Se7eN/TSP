@@ -105,7 +105,7 @@
 // -----------------------------------------------------------------------------------------------------------------------------------
     /COPY /QOpenSys/QIBM/UserData/OPS/Orion/serverworkspace/vi/vinayakmahajan/OrionContent/TSP/TS9902PR.sqlrpgle
 // ===================================================================================================================================
-// Parameters for Various Programs 
+// Parameters for Various Programs
 // -----------------------------------------------------------------------------------------------------------------------------------
 
 // Parameters for TS0303 - Display Summary (View)
@@ -196,7 +196,7 @@
         ENDIF;
 
         EXSR    ProcRequest;
-        
+
     ENDSR;
 // ===================================================================================================================================
 // Take Action 01
@@ -248,7 +248,7 @@
     BEGSR   ProcSubset;
 
         CALLP   TS0304(pFromSUM:pToSUM);
-        
+
         EXSR    BuildArray;
 
     ENDSR;
@@ -265,7 +265,7 @@
 
                 FromDate            =   %editc(TSSummaryArray(TmpCount).EntryDate:'X');
                 ToDate              =   %editc(TSSummaryArray(TmpCount).EntryDate:'X');
-                
+
                 EXSR    AdjustDate;
 
                 FromDTL.EntryDate   =   %dec(FromDate:8:0);
@@ -290,7 +290,7 @@
 
         SELECT;
             WHEN    UserProfileDS.PR1002    =   'DMY';
-                        
+
                 SELECT;
                             //Date is already in DMY Format.
 
@@ -304,7 +304,7 @@
                 ENDSL;
 
             WHEN    UserProfileDS.PR1002    =   'MDY';
-                        
+
                 SELECT;
                     WHEN    UserProfileDS.PR1001    =   'DMY';
                             FromDate    =   %subst(FromDate:3:2) + %subst(FromDate:1:2) + %subst(FromDate:5:4);
@@ -318,7 +318,7 @@
                 ENDSL;
 
             WHEN    UserProfileDS.PR1002    =   'YMD';
-                        
+
                 SELECT;
                     WHEN    UserProfileDS.PR1001    =   'DMY';
                             FromDate    =   %subst(FromDate:7:2) + %subst(FromDate:5:2) + %subst(FromDate:1:4);

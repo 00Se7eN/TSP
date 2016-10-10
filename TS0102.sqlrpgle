@@ -94,7 +94,7 @@
     /COPY /QOpenSys/QIBM/UserData/OPS/Orion/serverworkspace/vi/vinayakmahajan/OrionContent/TSP/TS9901PR.sqlrpgle
     /COPY /QOpenSys/QIBM/UserData/OPS/Orion/serverworkspace/vi/vinayakmahajan/OrionContent/TSP/TS9902PR.sqlrpgle
 // ===================================================================================================================================
-// Parameters for Various Programs 
+// Parameters for Various Programs
 // -----------------------------------------------------------------------------------------------------------------------------------
 
 // Parameters for TS0103 - Add Entries (View)
@@ -172,7 +172,7 @@
             F12Pressed  =   'N';
             LEAVESR;
         ENDIF;
-            
+
         IF  ProtectFields   =   'N';
             EXSR    ElementCheck;
             EXSR    OnScreenCheck;
@@ -184,7 +184,7 @@
         IF  ValidScr01  =   'Y';
         EXSR    ProcRequest;
         ENDIF;
-        
+
     ENDSR;
 // ===================================================================================================================================
 // Element Check
@@ -217,7 +217,7 @@
         ELSE;
 
             CALLP   COMN_ValidateDate(%editc(EntryDate:'X'):UserProfileDS.PR1001:IsValid);
-        
+
             IF  IsValid     =   'N';
                 ValidScr01  =   'N';
                 ErrorID     =   18;         //Date is invalid.
@@ -231,11 +231,11 @@
                     ErrorID     =   35;         //Future Date is not allowed.
                     EXSR    GetErrorMsg;
                 ENDIF;
-            
+
             ENDIF;
-        
+
         ENDIF;
-        
+
     ENDSR;
 // ===================================================================================================================================
 // Validate Activity ID
@@ -413,7 +413,7 @@
 
             SELECT;
                 WHEN    UserProfileDS.PR0501    =   2;          //Start-End
-                    
+
                         SELECT;
                             WHEN    TSEntryArray(Index).ActID   <>  *Zeros  AND
                                     StartTime   =   EndTime;
@@ -451,7 +451,7 @@
             ENDSL;
 
         ENDDO;
-        
+
     ENDSR;
 // ===================================================================================================================================
 // Compute Parameter
@@ -472,7 +472,7 @@
             WHEN    UserProfileDS.PR0501    =   4;                  //End-Duration
                     CALLP   TIME_ComputeStartTime(pTSEntryArray);
         ENDSL;
-        
+
     ENDSR;
 // ===================================================================================================================================
 // Database Check
@@ -540,10 +540,10 @@
                                 TmpArray(TmpIndex + 1).Status       = 'DE';
                                 TmpEntryTime                        =   TmpArray(TmpIndex).EntryTime;
                                 TmpStatus                           =   TmpArray(TmpIndex).Status;
-            
+
                                 TmpArray(TmpIndex).EntryTime        =   TmpArray(TmpIndex + 1).EntryTime;
                                 TmpArray(TmpIndex).Status           =   TmpArray(TmpIndex + 1).Status;
-            
+
                                 TmpArray(TmpIndex + 1).EntryTime    =   TmpEntryTime;
                                 TmpArray(TmpIndex + 1).Status       =   TmpStatus;
                             ENDIF;
@@ -551,13 +551,13 @@
                     WHEN    TmpArray(TmpIndex).EntryTime        >   TmpArray(TmpIndex + 1).EntryTime;
                             TmpEntryTime                        =   TmpArray(TmpIndex).EntryTime;
                             TmpStatus                           =   TmpArray(TmpIndex).Status;
-        
+
                             TmpArray(TmpIndex).EntryTime        =   TmpArray(TmpIndex + 1).EntryTime;
                             TmpArray(TmpIndex).Status           =   TmpArray(TmpIndex + 1).Status;
-        
+
                             TmpArray(TmpIndex + 1).EntryTime    =   TmpEntryTime;
                             TmpArray(TmpIndex + 1).Status       =   TmpStatus;
-        
+
                             ProcessArray    =   'Y';
                 ENDSL;
 
@@ -625,7 +625,7 @@
             UserProfileDS.PR0501    <>  1;          //Duration
             LEAVESR;
         ENDIF;
-        
+
         CALLP   TIME_GetTotalDuration(UserID:EntryDate:TotalDurationHH:TotalDurationMM);
 
             Index   =   *Zeros;
